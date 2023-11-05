@@ -1,0 +1,131 @@
+// Check the wiki for a full description of the configuration:
+// https://github.com/YaLTeR/niri/wiki/Configuration:-Introduction
+
+hotkey-overlay {
+    skip-at-startup
+}
+
+input {
+    keyboard {
+        xkb {
+            layout "us"
+        }
+    }
+
+    warp-mouse-to-focus
+    // focus-follows-mouse
+}
+
+layout {
+    gaps 16
+    center-focused-column "never"
+    always-center-single-column
+
+    default-column-width { proportion 0.5; }
+    preset-column-widths {
+        proportion 0.33333
+        proportion 0.5
+        proportion 0.66666
+        proportion 1.0
+    }
+
+    focus-ring {
+        width 2
+        active-gradient from="#33ccff" to="#00ff99" angle=45
+    }
+
+    tab-indicator {
+        // place-within-column
+        gap 6
+        width 2
+    }
+}
+
+environment {
+    ELECTRON_OZONE_PLATFORM_HINT "auto"
+}
+
+spawn-at-startup "/usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1"
+spawn-at-startup "ibus" "start"
+spawn-at-startup "swaybg" "-i" ".config/niri/wallpapers/sunset.jpg"
+spawn-at-startup "waybar"
+spawn-at-startup "wljoywake"
+spawn-at-startup "swayidle" "-w" "timeout" "180" "swaylock -f -c 000000" "timeout" "190" "niri msg action power-off-monitors" "resume" "niri msg action power-on-monitors"
+spawn-at-startup "swayidle" "-w" "timeout" "10" "if pgrep swaylock; then niri msg action power-off-monitors; fi" "resume" "niri msg action power-on-monitors"
+spawn-at-startup "wl-paste" "--type" "text" "--watch" "sh" ".config/niri/scripts/clipstore.sh"
+spawn-at-startup "wl-paste" "--type" "image" "--watch" "sh" ".config/niri/scripts/clipstore.sh"
+
+prefer-no-csd
+
+animations {
+    // off
+    // slowdown 0.5
+}
+
+window-rule {
+    match app-id="Bitwarden"
+    block-out-from "screen-capture"
+    // open-floating true
+    // opacity 0.5
+}
+
+window-rule {
+    geometry-corner-radius 10
+    clip-to-geometry true
+}
+
+binds {
+    Mod+Q { close-window; }
+    Mod+W { spawn "sh" ".config/niri/scripts/toggle-waybar.sh"; }
+    Mod+F { fullscreen-window; }
+    Mod+P { screenshot; }
+    Mod+B { spawn "swaylock" "-f" "-c" "000000"; }
+
+    Mod+A { spawn "kitty"; }
+    Mod+R { spawn "brave"; }
+    Mod+S { spawn "fuzzel"; }
+    Mod+T { toggle-column-tabbed-display; }
+    Mod+G { spawn "sh" ".config/niri/scripts/emoji.sh"; }
+
+    Mod+Z { set-column-width "-5%"; }
+    Mod+X { set-column-width "+5%"; }
+    Mod+C { center-column; }
+    Mod+D { toggle-window-floating; }
+    Mod+V { spawn "sh" ".config/niri/scripts/clipselect.sh"; }
+
+    Mod+J         { quit; }
+    Mod+L         { move-column-left; }
+    Mod+U         { consume-or-expel-window-left; }
+    Mod+Y         { consume-or-expel-window-right; }
+    Mod+Semicolon { move-column-right; }
+
+    Mod+M repeat=false { toggle-overview; }
+    Mod+N              { focus-column-left; }
+    Mod+E              { focus-window-down; }
+    Mod+I              { focus-window-up; }
+    Mod+O              { focus-column-right; }
+
+    // Mod+K           { }
+    Mod+H           { move-column-to-workspace-down; }
+    Mod+Comma       { focus-workspace-down; }
+    Mod+Period      { focus-workspace-up; }
+    Mod+Shift+Slash { move-column-to-workspace-up; }
+
+    Mod+WheelScrollDown cooldown-ms=150 { focus-workspace-down; }
+    Mod+WheelScrollUp   cooldown-ms=150 { focus-workspace-up; }
+
+    XF86AudioRaiseVolume allow-when-locked=true { spawn "wpctl" "set-volume" "@DEFAULT_AUDIO_SINK@" "0.02+"; }
+    XF86AudioLowerVolume allow-when-locked=true { spawn "wpctl" "set-volume" "@DEFAULT_AUDIO_SINK@" "0.02-"; }
+    XF86AudioMute        allow-when-locked=true { spawn "wpctl" "set-mute" "@DEFAULT_AUDIO_SINK@" "toggle"; }
+    XF86AudioMicMute     allow-when-locked=true { spawn "wpctl" "set-mute" "@DEFAULT_AUDIO_SOURCE@" "toggle"; }
+}
+
+output "LG Electronics LG ULTRAWIDE 307AZGF3R783" {
+    mode "3440x1440@159.962"
+    scale 1
+}
+
+output "Apple Computer Inc Color LCD Unknown" {
+    mode "2880x1800@59.990"
+    scale 1.2
+}

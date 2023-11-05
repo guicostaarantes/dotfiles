@@ -1,0 +1,61 @@
+[include]
+	path = .gituser
+
+[core]
+	editor = nvim
+
+[alias]
+	amend = commit -a --amend --no-edit
+	lol = log --oneline --branches --decorate --graph
+	sw = "!f() { \
+		branch=\"$1\"; \
+		remote=\"${2:-origin}\"; \
+		if git show-ref --verify --quiet \"refs/heads/$branch\"; then \
+			echo \"[INFO] Switching to existing local branch: $branch\"; \
+			git checkout \"$branch\"; \
+		else \
+			echo \"[INFO] Local branch not found. Fetching from $remote...\"; \
+			git fetch \"$remote\"; \
+			if git ls-remote --exit-code --heads \"$remote\" \"$branch\" > /dev/null; then \
+				echo \"[INFO] Remote branch found. Creating local branch and tracking $remote\"; \
+				git checkout -b \"$branch\" --track \"$remote/$branch\"; \
+			else \
+				echo \"[INFO] Remote branch not found. Creating new local branch: $branch\"; \
+				git checkout -b \"$branch\"; \
+			fi; \
+		fi; \
+	}; f"
+
+[branch]	
+	sort = -committerdate
+
+[checkout]
+	defaultRemote = origin
+
+[diff]
+	mnemonicPrefix = true
+	algorithm = minimal
+
+[fetch]
+	prune = true
+	pruneTags = true
+	output = compact
+	parallel = 0
+
+[push]
+	default = current
+	autoSetupRemote = true
+	followTags = true
+
+[rerere]
+	enabled = true
+	autoUpdate = true
+
+[showBranch]
+	default = HEAD
+	default = master
+
+[status]
+	relativePaths = false
+	short = true
+	branch = true

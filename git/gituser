@@ -1,0 +1,10 @@
+[user]
+	name = Add your name
+	email = add@your.email
+	signingkey = ssh-ed25519 ADD_YOUR_SSH_PUBLIC_KEY
+
+[gpg]
+	format = ssh
+
+[commit]
+	gpgsign = true
