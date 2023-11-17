@@ -8,6 +8,7 @@ mv ~/.config ~/.config-bkp-$DATE
 mkdir ~/.config
 mv ~/.alacritty.yml ~/.alacritty-bkp-$DATE.yml
 mv ~/.tmux.conf ~/.tmux-bkp-$DATE.conf
+mv ~/.zshrc ~/.zshrc-bkp-$DATE.conf
 echo "Done"
 
 echo "Creating symlink for neovim"
@@ -18,8 +19,8 @@ echo "Creating symlink for alacritty"
 ln -s $SCRIPTDIR/alacritty/alacritty.yml ~/.alacritty.yml
 echo "Done"
 
-echo "Creating symlink for fish"
-ln -s $SCRIPTDIR/fish ~/.config/fish
+echo "Creating symlink for zsh"
+ln -s $SCRIPTDIR/zsh/zshrc ~/.zshrc
 echo "Done"
 
 echo "Creating symlink for tmux"

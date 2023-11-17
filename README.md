@@ -6,9 +6,8 @@ Helps for installing a new environment and also for sharing with others :)
 
 - Text/code editor: Neovim 0.9
 - Terminal emulator: Alacritty 0.12
-- Shell: Fish 3.6
+- Shell: ZSH 5.9
 - Shell prompt: Starship 1.16
-- Shell plugin manager: Fisher 4.4
 - Nerd font: Iosevka Term 27.3
 - Version control: Git 2.39
 - CLI http client: Curl 7.88

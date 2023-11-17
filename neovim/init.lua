@@ -24,7 +24,7 @@ vim.opt.laststatus = 2
 vim.opt.scrolloff = 12
 vim.opt.splitbelow = true
 vim.opt.splitright = true
-vim.opt.shell = 'fish'
+vim.opt.shell = vim.loop.os_uname().sysname == 'Windows' and 'cmd' or 'zsh'
 vim.opt.updatetime = 1000
 vim.opt.cursorline = false
 vim.opt.termguicolors = true
@@ -293,6 +293,17 @@ require('lazy').setup({
 			},
 			view_options = {
 				show_hidden = true,
+			},
+			use_default_keymaps = false,
+			keymaps = {
+				['g?'] = 'actions.show_help',
+				['<CR>'] = 'actions.select',
+				['<C-l>'] = 'actions.refresh',
+				['-'] = 'actions.parent',
+				['ga'] = 'actions.cd',
+				['gx'] = 'actions.open_external',
+				['g.'] = 'actions.toggle_hidden',
+				['g\\'] = 'actions.toggle_trash',
 			},
 		},
 		dependencies = { 'nvim-tree/nvim-web-devicons' },

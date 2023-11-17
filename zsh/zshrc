@@ -1,0 +1,26 @@
+ZSH_DISABLE_COMPFIX=true
+source $(brew --prefix)/share/zsh-autosuggestions/zsh-autosuggestions.zsh
+
+export ANDROID_HOME=$HOME/Library/Android/sdk
+export PATH=$PATH:$ANDROID_HOME/emulator
+export PATH=$PATH:$ANDROID_HOME/platform-tools
+export PATH=$PATH:$ANDROID_HOME/tools
+
+export NVM_HOME="$HOME/.nvm"
+[ -s "$NVM_HOME/nvm.sh" ] && \. "$NVM_HOME/nvm.sh"
+[ -s "$NVM_HOME/bash_completion" ] && \. "$NVM_HOME/bash_completion"
+
+export RVM_HOME="$HOME/.rvm"
+export PATH="$PATH:$RVM_HOME/bin"
+[ -s "$RVM_DIR/scripts/rvm" ] && \. "$RVM_DIR/scripts/rvm"
+
+export CARGO_HOME="$HOME/.cargo"
+export PATH="$PATH:$CARGO_HOME/bin"
+
+alias awsume="source awsume"
+fpath=(~/.awsume/zsh-autocomplete/ $fpath)
+
+eval "$(zoxide init zsh)"
+eval "$(starship init zsh)"
+
+alias v="nvim ."

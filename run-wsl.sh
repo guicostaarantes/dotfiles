@@ -12,8 +12,8 @@ echo "Creating symlink for neovim"
 ln -s $SCRIPTDIR/neovim ~/.config/nvim
 echo "Done"
 
-echo "Creating symlink for fish"
-ln -s $SCRIPTDIR/fish ~/.config/fish
+echo "Creating symlink for zsh"
+ln -s $SCRIPTDIR/zsh/zshrc ~/.zshrc
 echo "Done"
 
 echo "Creating symlink for tmux"
