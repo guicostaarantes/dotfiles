@@ -170,28 +170,33 @@ require('lazy').setup({
 				pickers = {
 					find_files = {
 						theme = 'ivy',
+						previewer = false,
 						layout_config = {
 							height = 30
 						}
 					},
 					live_grep = {
 						theme = 'ivy',
+						previewer = false,
 						layout_config = {
 							height = 30
 						}
 					},
 					oldfiles = {
 						theme = 'ivy',
+						previewer = false,
 						layout_config = {
 							height = 30
 						}
 					},
 					buffers = {
 						theme = 'ivy',
+						previewer = false,
 						layout_config = {
 							height = 30
 						},
 						sort_mru = true,
+						ignore_current_buffer = true,
 						on_complete = { function() vim.cmd "stopinsert" end },
 						mappings = {
 							n = {
