@@ -28,7 +28,6 @@ vim.opt.shell = vim.loop.os_uname().sysname == 'Windows' and 'cmd' or 'zsh'
 vim.opt.updatetime = 1000
 vim.opt.cursorline = false
 vim.opt.termguicolors = true
-vim.opt.listchars = 'tab:» ,extends:›,precedes:‹,nbsp:#';
 
 require('lazy').setup({
 
@@ -226,7 +225,7 @@ require('lazy').setup({
 					end
 				},
 				mapping = cmp.mapping.preset.insert {
-					['<C-Space>'] = cmp.mapping.complete(),
+					['<C-x>'] = cmp.mapping.complete(),
 					['<Return>'] = cmp.mapping.confirm {
 						behavior = cmp.ConfirmBehavior.Replace,
 						select = true

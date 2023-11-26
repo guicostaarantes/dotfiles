@@ -10,6 +10,9 @@ export NVM_HOME="$HOME/.nvm"
 [ -s "$NVM_HOME/nvm.sh" ] && \. "$NVM_HOME/nvm.sh"
 [ -s "$NVM_HOME/bash_completion" ] && \. "$NVM_HOME/bash_completion"
 
+export PNPM_HOME="/Users/guiaula/Library/pnpm"
+export PATH="$PNPM_HOME:$PATH"
+
 export RVM_HOME="$HOME/.rvm"
 export PATH="$PATH:$RVM_HOME/bin"
 [ -s "$RVM_DIR/scripts/rvm" ] && \. "$RVM_DIR/scripts/rvm"
