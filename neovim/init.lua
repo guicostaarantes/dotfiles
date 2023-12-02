@@ -24,7 +24,7 @@ vim.opt.laststatus = 2
 vim.opt.scrolloff = 12
 vim.opt.splitbelow = true
 vim.opt.splitright = true
-vim.opt.shell = vim.loop.os_uname().sysname == 'Windows' and 'cmd' or 'zsh'
+vim.opt.shell = vim.fn.has('win32') == 1 and 'powershell.exe' or 'zsh'
 vim.opt.updatetime = 1000
 vim.opt.cursorline = false
 vim.opt.termguicolors = true
