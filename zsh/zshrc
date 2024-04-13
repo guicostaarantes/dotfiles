@@ -15,7 +15,7 @@ export PATH="$PNPM_HOME:$PATH"
 
 export RVM_HOME="$HOME/.rvm"
 export PATH="$PATH:$RVM_HOME/bin"
-[ -s "$RVM_DIR/scripts/rvm" ] && \. "$RVM_DIR/scripts/rvm"
+[ -s "$RVM_DIR/scripts/rvm" ] && source "$RVM_DIR/scripts/rvm"
 
 export CARGO_HOME="$HOME/.cargo"
 export PATH="$PATH:$CARGO_HOME/bin"
