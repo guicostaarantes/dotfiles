@@ -85,7 +85,7 @@ require('lazy').setup({
 					u = { '<cmd>lua vim.lsp.buf.references()<cr>', 'List references' },
 					i = { '<cmd>lua vim.lsp.buf.rename()<cr>', 'Rename symbol' },
 					-- o = {},
-					-- p = {},
+					p = { '<cmd>pw<cr>', 'Check current directory' },
 					a = { '<cmd>wa<cr>', 'Save all buffers' },
 					s = { '<cmd>w<cr>', 'Save buffer' },
 					d = { '<cmd>lua vim.lsp.buf.definition()<cr>', 'Jump to definition' },
