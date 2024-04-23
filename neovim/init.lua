@@ -123,7 +123,7 @@ require('lazy').setup({
 		init = function()
 			local lsp = require('lspconfig')
 			lsp.tsserver.setup {}
-			lsp.eslint.setup {}
+			-- lsp.eslint.setup {}
 			lsp.jsonls.setup {}
 			lsp.lua_ls.setup {}
 			lsp.rust_analyzer.setup {}
