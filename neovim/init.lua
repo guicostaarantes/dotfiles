@@ -29,6 +29,23 @@ vim.opt.updatetime = 1000
 vim.opt.cursorline = false
 vim.opt.termguicolors = true
 
+function NewTerminal()
+	vim.ui.input({ prompt = 'Terminal name: ' }, function(name)
+		vim.api.nvim_command("term")
+		local terminal_name = name == '' and 'zsh' or string.format("%s.zsh", name)
+		vim.api.nvim_command(string.format("fi %s", terminal_name))
+		vim.api.nvim_command("startinsert")
+	end)
+end
+
+function ClearTerminal()
+	vim.opt_local.scrollback = 1
+	vim.api.nvim_command("startinsert")
+	vim.api.nvim_feedkeys("clear", 't', false)
+	vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes('<cr>', true, false, true), 't', true)
+	vim.opt_local.scrollback = 10000
+end
+
 require('lazy').setup({
 
 	{
@@ -80,7 +97,8 @@ require('lazy').setup({
 					q = { '<cmd>w<cr><cmd>bd<cr>', 'Save and quit buffer' },
 					e = { '<cmd>Oil .<cr>', 'Explore project directory' },
 					r = { '<cmd>Telescope oldfiles<cr>', 'Open recent buffer list' },
-					t = { '<cmd>term<cr><cmd>fi zsh<cr>', 'Open new terminal buffer' },
+					T = { '<cmd>lua ClearTerminal()<cr>', 'Clear current terminal' },
+					t = { '<cmd>lua NewTerminal()<cr>', 'Open new terminal buffer' },
 					y = { '<cmd>lua vim.lsp.buf.format()<cr>', 'Format document' },
 					u = { '<cmd>lua vim.lsp.buf.references()<cr>', 'List references' },
 					i = { '<cmd>lua vim.lsp.buf.rename()<cr>', 'Rename symbol' },
@@ -125,7 +143,15 @@ require('lazy').setup({
 			lsp.tsserver.setup {}
 			-- lsp.eslint.setup {}
 			lsp.jsonls.setup {}
-			lsp.lua_ls.setup {}
+			lsp.lua_ls.setup {
+				settings = {
+					Lua = {
+						diagnostics = {
+							globals = { 'vim' }
+						}
+					}
+				}
+			}
 			lsp.rust_analyzer.setup {}
 			lsp.terraformls.setup {}
 			lsp.tflint.setup {}
