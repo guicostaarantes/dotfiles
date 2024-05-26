@@ -23,6 +23,7 @@ yay -S --noconfirm \
 	mako \
 	thunar \
 	polkit-gnome \
+	pavucontrol \
 	xdg-desktop-portal-hyprland
 # Development
 yay -S --noconfirm \
