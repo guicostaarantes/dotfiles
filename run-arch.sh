@@ -44,4 +44,5 @@ echo "Creating symlinks for neovim"
 ln -s $SCRIPTDIR/neovim ~/.config/nvim
 ln -s $SCRIPTDIR/alacritty/alacritty.toml ~/.alacritty.toml
 ln -s $SCRIPTDIR/zsh/zshrc ~/.zshrc
+ln -s $SCRIPTDIR/hypr ~/.config/hypr
 echo "Done"
