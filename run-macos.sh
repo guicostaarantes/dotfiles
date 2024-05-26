@@ -7,7 +7,6 @@ echo "Backup"
 mv ~/.config ~/.config-bkp-$DATE
 mkdir ~/.config
 mv ~/.alacritty.yml ~/.alacritty-bkp-$DATE.yml
-mv ~/.tmux.conf ~/.tmux-bkp-$DATE.conf
 mv ~/.zshrc ~/.zshrc-bkp-$DATE.conf
 echo "Done"
 
@@ -21,8 +20,4 @@ echo "Done"
 
 echo "Creating symlink for zsh"
 ln -s $SCRIPTDIR/zsh/zshrc ~/.zshrc
-echo "Done"
-
-echo "Creating symlink for tmux"
-ln -s $SCRIPTDIR/tmux/tmux.conf ~/.tmux.conf
 echo "Done"
