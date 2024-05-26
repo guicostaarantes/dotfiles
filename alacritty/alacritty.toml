@@ -1,0 +1,20 @@
+[colors.primary]
+background = "#131313"
+
+[font]
+size = 18.0
+
+[font.normal]
+family = "IosevkaTerm Nerd Font"
+
+[shell]
+program = "/bin/zsh"
+
+[window]
+dynamic_title = false
+resize_increments = true
+title = "Alacritty"
+
+[window.padding]
+x = 12
+y = 12
