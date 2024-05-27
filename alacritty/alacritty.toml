@@ -2,19 +2,21 @@
 background = "#131313"
 
 [font]
-size = 18.0
+size = 22.0
 
 [font.normal]
 family = "IosevkaTerm Nerd Font"
 
 [shell]
 program = "/bin/zsh"
+args = ["--login"]
 
 [window]
 dynamic_title = false
 resize_increments = true
 title = "Alacritty"
+decorations = "buttonless"
 
 [window.padding]
-x = 12
-y = 12
+x = 10
+y = 10
