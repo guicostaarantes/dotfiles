@@ -1,0 +1,43 @@
+[user]
+	name = Guilherme Arantes
+	email = arantes.g@outlook.com
+
+[core]
+	editor = nvim
+
+[alias]
+	amend = commit -a --amend --no-edit
+	lol = log --oneline --branches --decorate --graph
+
+[branch]	
+	sort = -committerdate
+
+[checkout]
+	defaultRemote = origin
+
+[diff]
+	mnemonicPrefix = true
+	algorithm = minimal
+
+[fetch]
+	prune = true
+	pruneTags = true
+	output = compact
+	parallel = 0
+
+[push]
+	default = current
+	followTags = true
+
+[rerere]
+	enabled = true
+	autoUpdate = true
+
+[showBranch]
+	default = HEAD
+	default = master
+
+[status]
+	relativePaths = false
+	short = true
+	branch = true

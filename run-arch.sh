@@ -45,6 +45,7 @@ yay -S --noconfirm \
 echo "Done"
 
 echo "Creating symlinks"
+ln -s $SCRIPTDIR/git/gitconfig ~/.gitconfig
 ln -s $SCRIPTDIR/neovim ~/.config/nvim
 ln -s $SCRIPTDIR/alacritty/alacritty.toml ~/.alacritty.toml
 ln -s $SCRIPTDIR/zsh/zshrc-arch ~/.zshrc
