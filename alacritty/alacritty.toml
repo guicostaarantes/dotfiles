@@ -2,13 +2,13 @@
 background = "#131313"
 
 [font]
-size = 22.0
+size = 18.0
 
 [font.normal]
 family = "IosevkaTerm Nerd Font"
 
 [shell]
-program = "/bin/zsh"
+program = "zsh"
 args = ["--login"]
 
 [window]
