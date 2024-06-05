@@ -2,7 +2,7 @@
 background = "#131313"
 
 [font]
-size = 18.0
+size = 14.0
 
 [font.normal]
 family = "IosevkaTerm Nerd Font"
@@ -15,7 +15,7 @@ args = ["--login"]
 dynamic_title = false
 resize_increments = true
 title = "Alacritty"
-decorations = "buttonless"
+decorations = "none"
 
 [window.padding]
 x = 10

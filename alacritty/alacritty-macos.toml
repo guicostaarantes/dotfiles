@@ -1,0 +1,22 @@
+[colors.primary]
+background = "#131313"
+
+[font]
+size = 22.0
+
+[font.normal]
+family = "IosevkaTerm Nerd Font"
+
+[shell]
+program = "zsh"
+args = ["--login"]
+
+[window]
+dynamic_title = false
+resize_increments = true
+title = "Alacritty"
+decorations = "buttonless"
+
+[window.padding]
+x = 10
+y = 10
