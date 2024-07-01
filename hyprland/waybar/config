@@ -1,0 +1,94 @@
+{
+    "layer": "top",
+    "position": "top",
+    "spacing": 4,
+    "modules-left": [
+        "hyprland/workspaces"
+    ],
+    "modules-center": [],
+    "modules-right": [
+        "temperature",
+        "cpu",
+        "memory",
+        "network",
+        "idle_inhibitor",
+        "pulseaudio",
+        "backlight",
+        // "keyboard-state",
+        "battery",
+        "tray",
+        "clock"
+    ],
+    "hyprland/workspaces": {
+         "format": "{icon}",
+         "on-click": "activate"
+    },
+    "keyboard-state": {
+        "numlock": true,
+        "capslock": true,
+        "format": "{name} {icon}",
+        "format-icons": {
+            "locked": "",
+            "unlocked": ""
+        }
+    },
+    "idle_inhibitor": {
+        "format": " {icon} ",
+        "format-icons": {
+            "activated": "",
+            "deactivated": ""
+        }
+    },
+    "tray": {
+        "spacing": 10
+    },
+    "clock": {
+        "tooltip": true,
+        "interval": 1,
+        "format": "{:%a %b %d | %H:%M:%S}",
+    },
+    "cpu": {
+        "format": "  {usage}%"
+    },
+    "memory": {
+        "format": "  {}%"
+    },
+    "temperature": {
+        "thermal-zone": 2,
+        "hwmon-path": "/sys/class/hwmon/hwmon1/temp1_input",
+        "format": " {temperatureC}°C",
+    },
+    "backlight": {
+        "format": "{icon} {percent}%",
+        "format-icons": ["", "", "", "", "", "", "", "", ""]
+    },
+    "battery": {
+        "states": {
+            "warning": 40,
+            "critical": 20
+        },
+        "format": "{icon} {capacity}%",
+        "format-charging": " {capacity}%",
+        "format-plugged": " {capacity}%",
+        "format-alt": "{icon} {time}",
+        "format-icons": ["", "", "", "", ""]
+    },
+    "network": {
+        "interval": 1,
+        "format-wifi": "   {bandwidthUpBytes}  {bandwidthDownBytes}",
+        "format-ethernet": "󰈀   {bandwidthUpBytes}  {bandwidthDownBytes}",
+        "format-disconnected": "󰌙  No connection",
+    },
+    "pulseaudio": {
+        "scroll-step": 5,
+        "format": "{icon}  {volume}% {format_source}",
+        "format-bluetooth": " {icon} {volume}% {format_source}",
+        "format-bluetooth-muted": " {icon} {format_source}",
+        "format-source": " {volume}%",
+        "format-source-muted": "",
+        "format-icons": {
+            "default": ["", "", "", "", ""]
+        },
+        "on-click": "pavucontrol"
+    }
+}
