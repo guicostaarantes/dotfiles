@@ -62,6 +62,10 @@ require('lazy').setup({
 
 	{
 		'folke/which-key.nvim',
+		dependencies = {
+			{ 'echasnovski/mini.icons', version = false },
+			'nvim-tree/nvim-web-devicons',
+		},
 		init = function()
 			vim.o.timeout = true
 			vim.o.timeoutlen = 1000
@@ -91,48 +95,43 @@ require('lazy').setup({
 			-- which-key for maps that start with the leader key
 			local which = require('which-key')
 			which.setup {}
-			which.register({
-				['<leader>'] = {
-					Q = { '<cmd>bd!<cr>', 'Quit buffer (discard unsaved changes)' },
-					q = { '<cmd>w<cr><cmd>bd<cr>', 'Save and quit buffer' },
-					e = { '<cmd>Oil .<cr>', 'Explore project directory' },
-					r = { '<cmd>Telescope oldfiles<cr>', 'Open recent buffer list' },
-					T = { '<cmd>lua ClearTerminal()<cr>', 'Clear current terminal' },
-					t = { '<cmd>lua NewTerminal()<cr>', 'Open new terminal buffer' },
-					y = { '<cmd>lua vim.lsp.buf.format()<cr>', 'Format document' },
-					u = { '<cmd>lua vim.lsp.buf.references()<cr>', 'List references' },
-					i = { '<cmd>lua vim.lsp.buf.rename()<cr>', 'Rename symbol' },
-					-- o = {},
-					p = { '<cmd>pw<cr>', 'Check current directory' },
-					a = { '<cmd>wa<cr>', 'Save all buffers' },
-					s = { '<cmd>w<cr>', 'Save buffer' },
-					d = { '<cmd>lua vim.lsp.buf.definition()<cr>', 'Jump to definition' },
-					f = { '<cmd>Telescope find_files<cr>', 'Search file in current directory' },
-					g = { '<cmd>Telescope live_grep<cr>', 'Search file content in current directory' },
-					h = { '<cmd>lua vim.lsp.buf.hover()<cr>', 'Show documentation' },
-					j = { '<cmd>Gitsigns next_hunk<cr>', 'Jump to next git hunk' },
-					k = { '<cmd>Gitsigns prev_hunk<cr>', 'Jump to previous git hunk' },
-					-- l = {},
-					z = { '<cmd>lua vim.lsp.buf.code_action()<cr>', 'Show possible actions' },
-					x = { '<cmd>lua vim.diagnostic.goto_prev()<cr>', 'Jump to previous diagnostic' },
-					c = { '<cmd>lua vim.diagnostic.goto_next()<cr>', 'Jump to next diagnostic' },
-					v = { '<cmd>Telescope diagnostics<cr>', 'List diagnostics' },
-					b = { '<cmd>Telescope buffers<cr>', 'List buffers' },
-					n = { '<cmd>G<cr><C-w>o', 'Open git client' },
-					m = { '<cmd>Telescope resume<cr>', 'Back to Telescope panel' },
-					w = {
-						name = '+windows',
-						s = { '<cmd>split<cr>', 'Create new window below' },
-						v = { '<cmd>vsplit<cr>', 'Create new window to the right' },
-						h = { '<C-w>h', 'Navigate to window in the left' },
-						j = { '<C-w>j', 'Navigate to window below' },
-						k = { '<C-w>k', 'Navigate to window above' },
-						l = { '<C-w>l', 'Navigate to window in the right' },
-						o = { '<C-w>o', 'Close all other windows' },
-						c = { '<C-w>c', 'Close this window' },
-					},
-				},
-			})
+			which.add(
+				{
+					{ "<leader>Q", "<cmd>bd!<cr>", desc = "Quit buffer (discard unsaved changes)" },
+					{ "<leader>T", "<cmd>lua ClearTerminal()<cr>", desc = "Clear current terminal" },
+					{ "<leader>a", "<cmd>wa<cr>", desc = "Save all buffers" },
+					{ "<leader>b", "<cmd>Telescope buffers<cr>", desc = "List buffers" },
+					{ "<leader>c", "<cmd>lua vim.diagnostic.goto_next()<cr>", desc = "Jump to next diagnostic" },
+					{ "<leader>d", "<cmd>lua vim.lsp.buf.definition()<cr>", desc = "Jump to definition" },
+					{ "<leader>e", "<cmd>Oil .<cr>", desc = "Explore project directory" },
+					{ "<leader>f", "<cmd>Telescope find_files<cr>", desc = "Search file in current directory" },
+					{ "<leader>g", "<cmd>Telescope live_grep<cr>", desc = "Search file content in current directory" },
+					{ "<leader>h", "<cmd>lua vim.lsp.buf.hover()<cr>", desc = "Show documentation" },
+					{ "<leader>i", "<cmd>lua vim.lsp.buf.rename()<cr>", desc = "Rename symbol" },
+					{ "<leader>j", "<cmd>Gitsigns next_hunk<cr>", desc = "Jump to next git hunk" },
+					{ "<leader>k", "<cmd>Gitsigns prev_hunk<cr>", desc = "Jump to previous git hunk" },
+					{ "<leader>m", "<cmd>Telescope resume<cr>", desc = "Back to Telescope panel" },
+					{ "<leader>n", "<cmd>G<cr><C-w>o", desc = "Open git client" },
+					{ "<leader>p", "<cmd>pw<cr>", desc = "Check current directory" },
+					{ "<leader>q", "<cmd>w<cr><cmd>bd<cr>", desc = "Save and quit buffer" },
+					{ "<leader>r", "<cmd>Telescope oldfiles<cr>", desc = "Open recent buffer list" },
+					{ "<leader>s", "<cmd>w<cr>", desc = "Save buffer" },
+					{ "<leader>t", "<cmd>lua NewTerminal()<cr>", desc = "Open new terminal buffer" },
+					{ "<leader>u", "<cmd>lua vim.lsp.buf.references()<cr>", desc = "List references" },
+					{ "<leader>v", "<cmd>Telescope diagnostics<cr>", desc = "List diagnostics" },
+					{ "<leader>w", group = "windows" },
+					{ "<leader>wc", "<C-w>c", desc = "Close this window" },
+					{ "<leader>wh", "<C-w>h", desc = "Navigate to window in the left" },
+					{ "<leader>wj", "<C-w>j", desc = "Navigate to window below" },
+					{ "<leader>wk", "<C-w>k", desc = "Navigate to window above" },
+					{ "<leader>wl", "<C-w>l", desc = "Navigate to window in the right" },
+					{ "<leader>wo", "<C-w>o", desc = "Close all other windows" },
+					{ "<leader>ws", "<cmd>split<cr>", desc = "Create new window below" },
+					{ "<leader>wv", "<cmd>vsplit<cr>", desc = "Create new window to the right" },
+					{ "<leader>x", "<cmd>lua vim.diagnostic.goto_prev()<cr>", desc = "Jump to previous diagnostic" },
+					{ "<leader>y", "<cmd>lua vim.lsp.buf.format()<cr>", desc = "Format document" },
+					{ "<leader>z", "<cmd>lua vim.lsp.buf.code_action()<cr>", desc = "Show possible actions" },
+				})
 		end
 	},
 
@@ -317,6 +316,10 @@ require('lazy').setup({
 
 	{
 		'stevearc/oil.nvim',
+		dependencies = {
+			{ 'echasnovski/mini.icons', version = false },
+			'nvim-tree/nvim-web-devicons',
+		},
 		opts = {
 			columns = {
 				'icon',
@@ -336,7 +339,6 @@ require('lazy').setup({
 				['g\\'] = 'actions.toggle_trash',
 			},
 		},
-		dependencies = { 'nvim-tree/nvim-web-devicons' },
 	},
 
 	{
