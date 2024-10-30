@@ -71,9 +71,9 @@ require('lazy').setup({
 			vim.o.timeoutlen = 1000
 			vim.g.mapleader = ' '
 			local set = vim.keymap.set
-			-- jk to cancel insert mode
-			set('i', 'jk', '<Esc>')
-			set('t', 'jk', '<C-\\><C-n>')
+			-- ,. to cancel insert mode
+			set('i', ',.', '<Esc>')
+			set('t', ',.', '<C-\\><C-n>')
 			-- do not add to register with x, c or d
 			set('n', 'x', '"_x')
 			set('n', 'd', '"_d')
@@ -139,8 +139,7 @@ require('lazy').setup({
 		'neovim/nvim-lspconfig',
 		init = function()
 			local lsp = require('lspconfig')
-			lsp.tsserver.setup {}
-			-- lsp.eslint.setup {}
+			lsp.ts_ls.setup {}
 			lsp.jsonls.setup {}
 			lsp.lua_ls.setup {
 				settings = {
@@ -343,7 +342,9 @@ require('lazy').setup({
 
 	{
 		'folke/flash.nvim',
-		opts = {},
+		opts = {
+			labels = "tnseriaogmdhcxzplfuwyqbjvk",
+		},
 		keys = {
 			{ 's', mode = { 'n', 'x', 'o' }, function() require('flash').jump() end, desc = 'Flash' },
 			{ 'S', mode = { 'n', 'x', 'o' }, function() require('flash').treesitter() end, desc = 'Flash Treesitter' },
