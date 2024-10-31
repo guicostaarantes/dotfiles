@@ -10,12 +10,11 @@ export NVM_HOME="$HOME/.nvm"
 [ -s "$NVM_HOME/nvm.sh" ] && \. "$NVM_HOME/nvm.sh"
 [ -s "$NVM_HOME/bash_completion" ] && \. "$NVM_HOME/bash_completion"
 
+export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
+export PATH="$PATH:/Users/guiaula/.local/bin"
+
 export PNPM_HOME="/Users/guiaula/Library/pnpm"
 export PATH="$PNPM_HOME:$PATH"
-
-export RVM_HOME="$HOME/.rvm"
-export PATH="$PATH:$RVM_HOME/bin"
-[ -s "$RVM_DIR/scripts/rvm" ] && source "$RVM_DIR/scripts/rvm"
 
 export CARGO_HOME="$HOME/.cargo"
 export PATH="$PATH:$CARGO_HOME/bin"
