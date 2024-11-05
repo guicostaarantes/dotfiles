@@ -11,13 +11,14 @@
         "cpu",
         "memory",
         "network",
-        "idle_inhibitor",
+        // "idle_inhibitor",
         "pulseaudio",
         "backlight",
         // "keyboard-state",
         "battery",
         "tray",
-        "clock"
+        "clock",
+        "custom/power"
     ],
     "hyprland/workspaces": {
          "format": "{icon}",
@@ -90,5 +91,8 @@
             "default": ["", "", "", "", ""]
         },
         "on-click": "pavucontrol"
+    },
+    "custom/power": {
+        "format":"  ", "on-click":"sh $HOME/.config/hypr/scripts/powermenu.sh"
     }
 }
