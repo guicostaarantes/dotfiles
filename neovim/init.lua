@@ -150,6 +150,8 @@ require('lazy').setup({
 				}
 			}
 			lsp.rust_analyzer.setup {}
+			lsp.gopls.setup {}
+			lsp.nixd.setup {}
 			lsp.terraformls.setup {}
 			lsp.tflint.setup {}
 			lsp.yamlls.setup {}
