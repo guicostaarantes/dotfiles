@@ -28,6 +28,9 @@ vim.opt.shell = vim.fn.has('win32') == 1 and 'powershell.exe' or 'zsh'
 vim.opt.updatetime = 1000
 vim.opt.cursorline = false
 vim.opt.termguicolors = true
+vim.diagnostic.config({
+  virtual_text = false,
+})
 
 function NewTerminal()
 	vim.ui.input({ prompt = 'Terminal name: ' }, function(name)
@@ -280,6 +283,13 @@ require('lazy').setup({
 					{ name = 'buffer' }
 				}
 			}
+		end
+	},
+	
+	{
+		'https://git.sr.ht/~whynothugo/lsp_lines.nvim',
+		config = function()
+			require("lsp_lines").setup()
 		end
 	},
 
