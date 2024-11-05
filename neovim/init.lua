@@ -71,21 +71,20 @@ require('lazy').setup({
 			vim.o.timeoutlen = 1000
 			vim.g.mapleader = ' '
 			local set = vim.keymap.set
-			-- ,. to cancel insert mode
-			set('i', ',.', '<Esc>')
-			set('t', ',.', '<C-\\><C-n>')
+			-- map escape in terminal mode to move into normal mode
+			set('t', '<Esc>', '<C-\\><C-n>')
 			-- do not add to register with x, c or d
 			set('n', 'x', '"_x')
 			set('n', 'd', '"_d')
 			set('n', 'D', 'd')
 			set('n', 'c', '"_c')
 			set('n', 'C', 'c')
-			set('n', 'Y', '"+y')
 			set('v', 'x', '"_x')
 			set('v', 'd', '"_d')
 			set('v', 'D', 'd')
 			set('v', 'c', '"_c')
 			set('v', 'C', 'c')
+			set('n', 'Y', '"+y')
 			set('v', 'Y', '"+y')
 			-- first level keybindings
 			set('n', '-', '<cmd>lua require("oil").open()<cr>', {
@@ -103,29 +102,29 @@ require('lazy').setup({
 					{ "<leader>b", "<cmd>Telescope buffers<cr>", desc = "List buffers" },
 					{ "<leader>c", "<cmd>lua vim.diagnostic.goto_next()<cr>", desc = "Jump to next diagnostic" },
 					{ "<leader>d", "<cmd>lua vim.lsp.buf.definition()<cr>", desc = "Jump to definition" },
-					{ "<leader>e", "<cmd>Oil .<cr>", desc = "Explore project directory" },
+					{ "<leader>e", "<cmd>Oil .<cr>", desc = "Explore current directory" },
 					{ "<leader>f", "<cmd>Telescope find_files<cr>", desc = "Search file in current directory" },
 					{ "<leader>g", "<cmd>Telescope live_grep<cr>", desc = "Search file content in current directory" },
 					{ "<leader>h", "<cmd>lua vim.lsp.buf.hover()<cr>", desc = "Show documentation" },
-					{ "<leader>i", "<cmd>lua vim.lsp.buf.rename()<cr>", desc = "Rename symbol" },
-					{ "<leader>j", "<cmd>Gitsigns next_hunk<cr>", desc = "Jump to next git hunk" },
-					{ "<leader>k", "<cmd>Gitsigns prev_hunk<cr>", desc = "Jump to previous git hunk" },
+					{ "<leader>i", "<cmd>Telescope oldfiles<cr>", desc = "Open recent buffer list" },
+					{ "<leader>j", "<cmd>Gitsigns prev_hunk<cr>", desc = "Jump to previous git hunk" },
+					{ "<leader>l", "<cmd>Gitsigns next_hunk<cr>", desc = "Jump to next git hunk" },
 					{ "<leader>m", "<cmd>Telescope resume<cr>", desc = "Back to Telescope panel" },
 					{ "<leader>n", "<cmd>G<cr><C-w>o", desc = "Open git client" },
 					{ "<leader>p", "<cmd>pw<cr>", desc = "Check current directory" },
 					{ "<leader>q", "<cmd>w<cr><cmd>bd<cr>", desc = "Save and quit buffer" },
-					{ "<leader>r", "<cmd>Telescope oldfiles<cr>", desc = "Open recent buffer list" },
+					{ "<leader>r", "<cmd>lua vim.lsp.buf.rename()<cr>", desc = "Rename symbol" },
 					{ "<leader>s", "<cmd>w<cr>", desc = "Save buffer" },
 					{ "<leader>t", "<cmd>lua NewTerminal()<cr>", desc = "Open new terminal buffer" },
 					{ "<leader>u", "<cmd>lua vim.lsp.buf.references()<cr>", desc = "List references" },
-					{ "<leader>v", "<cmd>Telescope diagnostics<cr>", desc = "List diagnostics" },
+					{ "<leader>v", require("lsp_lines").toggle, desc = "Toggle diagnostic preview" },
 					{ "<leader>w", group = "windows" },
 					{ "<leader>wc", "<C-w>c", desc = "Close this window" },
-					{ "<leader>wh", "<C-w>h", desc = "Navigate to window in the left" },
-					{ "<leader>wj", "<C-w>j", desc = "Navigate to window below" },
-					{ "<leader>wk", "<C-w>k", desc = "Navigate to window above" },
-					{ "<leader>wl", "<C-w>l", desc = "Navigate to window in the right" },
-					{ "<leader>wo", "<C-w>o", desc = "Close all other windows" },
+					{ "<leader>wn", "<C-w>h", desc = "Navigate to window in the left" },
+					{ "<leader>we", "<C-w>j", desc = "Navigate to window below" },
+					{ "<leader>wi", "<C-w>k", desc = "Navigate to window above" },
+					{ "<leader>wo", "<C-w>l", desc = "Navigate to window in the right" },
+					{ "<leader>wa", "<C-w>o", desc = "Close all other windows" },
 					{ "<leader>ws", "<cmd>split<cr>", desc = "Create new window below" },
 					{ "<leader>wv", "<cmd>vsplit<cr>", desc = "Create new window to the right" },
 					{ "<leader>x", "<cmd>lua vim.diagnostic.goto_prev()<cr>", desc = "Jump to previous diagnostic" },
