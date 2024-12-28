@@ -34,6 +34,7 @@ vim.diagnostic.config({
 
 function NewTerminal()
 	vim.ui.input({ prompt = 'Terminal name: ' }, function(name)
+		if name == nil then return end
 		vim.api.nvim_command("term")
 		local terminal_name = name == '' and 'zsh' or string.format("%s.zsh", name)
 		vim.api.nvim_command(string.format("fi %s", terminal_name))
