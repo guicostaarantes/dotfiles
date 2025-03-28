@@ -8,6 +8,7 @@
 [alias]
 	amend = commit -a --amend --no-edit
 	lol = log --oneline --branches --decorate --graph
+	sw = "!branch=\"$1\"; remote=\"${2:-origin}\"; git fetch \"$remote\"; if git rev-parse --verify --quiet \"$branch\" > /dev/null; then git switch \"$branch\"; elif git rev-parse --verify --quiet \"$remote/$branch\" > /dev/null; then git switch -c \"$branch\" \"$remote/$branch\"; else git switch -c \"$branch\"; fi"
 
 [branch]	
 	sort = -committerdate
