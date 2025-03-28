@@ -8,7 +8,24 @@
 [alias]
 	amend = commit -a --amend --no-edit
 	lol = log --oneline --branches --decorate --graph
-	sw = "!branch=\"$1\"; remote=\"${2:-origin}\"; git fetch \"$remote\"; if git rev-parse --verify --quiet \"$branch\" > /dev/null; then git switch \"$branch\"; elif git rev-parse --verify --quiet \"$remote/$branch\" > /dev/null; then git switch -c \"$branch\" \"$remote/$branch\"; else git switch -c \"$branch\"; fi"
+	sw = "!f() { \
+    local branch=\"$1\"; \
+    local remote=\"${2:-origin}\"; \
+    if git switch \"$branch\" > /dev/null 2>&1; then \
+      echo \"Switched to local branch '$branch'.\"; \
+    else \
+      if git fetch \"$remote\" > /dev/null 2>&1; then \
+        if git switch -c \"$branch\" \"$remote/$branch\" > /dev/null 2>&1; then \
+          echo \"Created and switched to branch '$branch' tracking '$remote/$branch'.\"; \
+        else \
+          git switch -c \"$branch\"; \
+          echo \"Created local branch '$branch'. Remote branch '$remote/$branch' not found.\"; \
+        fi; \
+      else \
+        echo \"Failed to fetch from remote '$remote'.\"; \
+      fi; \
+    fi; \
+} && f \"$1\" \"$2\""
 
 [branch]	
 	sort = -committerdate
