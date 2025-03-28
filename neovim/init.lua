@@ -29,7 +29,7 @@ vim.opt.updatetime = 1000
 vim.opt.cursorline = false
 vim.opt.termguicolors = true
 vim.diagnostic.config({
-  virtual_text = false,
+	virtual_text = false,
 })
 
 function NewTerminal()
@@ -286,7 +286,16 @@ require('lazy').setup({
 			}
 		end
 	},
-	
+
+	{
+		'stevearc/conform.nvim',
+		formatters_by_ft = {
+			lua = { "stylua" },
+			rust = { "rustfmt", lsp_format = "fallback" },
+			javascript = { "prettier", "npx prettier", stop_after_first = true },
+		},
+	},
+
 	{
 		'https://git.sr.ht/~whynothugo/lsp_lines.nvim',
 		config = function()
