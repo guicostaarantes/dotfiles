@@ -38,6 +38,8 @@ function NewTerminal()
 		vim.api.nvim_command("term")
 		local terminal_name = name == '' and 'zsh' or string.format("%s.zsh", name)
 		vim.api.nvim_command(string.format("fi %s", terminal_name))
+		vim.opt_local.number = true
+		vim.opt_local.relativenumber = true
 		vim.api.nvim_command("startinsert")
 	end)
 end
@@ -45,9 +47,21 @@ end
 function ClearTerminal()
 	vim.opt_local.scrollback = 1
 	vim.api.nvim_command("startinsert")
+	vim.api.nvim_feedkeys("", 't', false)
+	vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes('<cr>', true, false, true), 't', true)
 	vim.api.nvim_feedkeys("clear", 't', false)
 	vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes('<cr>', true, false, true), 't', true)
 	vim.opt_local.scrollback = 10000
+end
+
+function ToggleMouse()
+  if vim.o.mouse == '' then
+    vim.opt.mouse = 'a'
+    print("Mouse mode enabled")
+  else
+    vim.opt.mouse = ''
+    print("Mouse mode disabled")
+  end
 end
 
 require('lazy').setup({
@@ -112,6 +126,7 @@ require('lazy').setup({
 					{ "<leader>h", "<cmd>lua vim.lsp.buf.hover()<cr>", desc = "Show documentation" },
 					{ "<leader>i", "<cmd>Telescope oldfiles<cr>", desc = "Open recent buffer list" },
 					{ "<leader>j", "<cmd>Gitsigns prev_hunk<cr>", desc = "Jump to previous git hunk" },
+					{ "<leader>k", "<cmd>lua ToggleMouse()<cr>", desc = "Turn mouse mode on/off" },
 					{ "<leader>l", "<cmd>Gitsigns next_hunk<cr>", desc = "Jump to next git hunk" },
 					{ "<leader>m", "<cmd>Telescope resume<cr>", desc = "Back to Telescope panel" },
 					{ "<leader>n", "<cmd>G<cr><C-w>o", desc = "Open git client" },
