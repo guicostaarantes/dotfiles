@@ -129,7 +129,7 @@ require('lazy').setup({
 					{ "<leader>k", "<cmd>lua ToggleMouse()<cr>", desc = "Turn mouse mode on/off" },
 					{ "<leader>l", "<cmd>Gitsigns next_hunk<cr>", desc = "Jump to next git hunk" },
 					{ "<leader>m", "<cmd>Telescope resume<cr>", desc = "Back to Telescope panel" },
-					{ "<leader>n", "<cmd>G<cr><C-w>o", desc = "Open git client" },
+					{ "<leader>n", "<cmd>lua require(\"neogit\").open({ kind = \"replace\" })<cr>", desc = "Open git client" },
 					{ "<leader>p", "<cmd>pw<cr>", desc = "Check current directory" },
 					{ "<leader>q", "<cmd>w<cr><cmd>bd<cr>", desc = "Save and quit buffer" },
 					{ "<leader>r", "<cmd>lua vim.lsp.buf.rename()<cr>", desc = "Rename symbol" },
@@ -386,6 +386,15 @@ require('lazy').setup({
 			{ 'S', mode = { 'n', 'x', 'o' }, function() require('flash').treesitter() end, desc = 'Flash Treesitter' },
 			{ '<c-s>', mode = { 'c' }, function() require('flash').toggle() end, desc = 'Toggle Flash Search' },
 		}
+	},
+
+	{
+  "NeogitOrg/neogit",
+		dependencies = {
+			"nvim-lua/plenary.nvim",
+			"sindrets/diffview.nvim",
+			"nvim-telescope/telescope.nvim",
+		},
 	},
 
 	{

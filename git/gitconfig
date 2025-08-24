@@ -1,7 +1,3 @@
-[user]
-	name = Guilherme Arantes
-	email = arantes.g@outlook.com
-
 [core]
 	editor = nvim
 
