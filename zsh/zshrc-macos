@@ -25,4 +25,9 @@ fpath=(~/.awsume/zsh-autocomplete/ $fpath)
 eval "$(zoxide init zsh)"
 eval "$(starship init zsh)"
 
+export HISTFILE="$HOME/.zsh_history"
+export HISTSIZE=10000
+export SAVEHIST=10000
+
+alias l="ls -alh --color=auto"
 alias v="nvim ."
