@@ -1,9 +1,10 @@
 #!/bin/bash
+set -e
+
 SCRIPTPATH=$(readlink -f "$0")
 SCRIPTDIR=$(dirname "$SCRIPTPATH")
 
-echo "Installing/updating packages with brew"
-# Development
+# Development packages
 brew install 
 	zsh \
 	kitty \
@@ -13,11 +14,9 @@ brew install
 	zoxide \
 	curl \
 	less
-echo "Done"
 
-echo "Creating symlinks"
-ln -s $SCRIPTDIR/git/gitconfig ~/.gitconfig
-ln -s $SCRIPTDIR/neovim ~/.config/nvim
-ln -s $SCRIPTDIR/kitty ~/.config/kitty
-ln -s $SCRIPTDIR/zsh/zshrc-macos ~/.zshrc
-echo "Done"
+# Symlinks
+./create_symlink.sh $SCRIPTDIR/git/gitconfig ~/.gitconfig
+./create_symlink.sh $SCRIPTDIR/neovim ~/.config/nvim
+./create_symlink.sh $SCRIPTDIR/kitty ~/.config/kitty
+./create_symlink.sh $SCRIPTDIR/zsh/zshrc-macos ~/.zshrc

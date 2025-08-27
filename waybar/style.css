@@ -1,8 +1,8 @@
 * {
-	font-family: "Iosevka Term";
+	font-family: "Iosevka Nerd Font";
 	font-size: 16px;
 	font-weight: bold;
-	border-radius: 2px;
+	border-radius: 8px;
 	transition-property: background-color;
 	transition-duration: 0.5s;
 }
@@ -27,13 +27,13 @@ window#waybar {
 }
 
 window > box {
-	margin-left: 8px;
-	margin-right: 9px;
-	margin-top: 4px;
+	margin-left: 16px;
+	margin-right: 16px;
+	margin-top: 8px;
 	background-color: #131313;
 	opacity: 0.8;
-	border-radius: 8px;
-	padding: 4px;
+	border-radius: 6px;
+	padding: 6px;
 	border: 2px none #33ccff;
 }
 
