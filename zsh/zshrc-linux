@@ -1,11 +1,11 @@
-eval "$(zoxide init zsh)"
-eval "$(starship init zsh)"
-
-export SSH_AUTH_SOCK="$HOME/.var/app/com.bitwarden.desktop/data/.bitwarden-ssh-agent.sock"
-
-alias v="nvim ."
-
 export HISTFILE="$HOME/.zsh_history"
 export HISTSIZE=10000
 export SAVEHIST=10000
-source ~/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh
+
+alias l="ls -alh --color=auto"
+
+eval "$(starship init zsh)"
+eval "$(zoxide init zsh)"
+alias v="nvim ."
+
+export SSH_AUTH_SOCK="$HOME/.bitwarden-ssh-agent.sock"

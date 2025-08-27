@@ -5,23 +5,23 @@
 	amend = commit -a --amend --no-edit
 	lol = log --oneline --branches --decorate --graph
 	sw = "!f() { \
-    local branch=\"$1\"; \
-    local remote=\"${2:-origin}\"; \
-    if git switch \"$branch\" > /dev/null 2>&1; then \
-      echo \"Switched to local branch '$branch'.\"; \
-    else \
-      if git fetch \"$remote\" > /dev/null 2>&1; then \
-        if git switch -c \"$branch\" \"$remote/$branch\" > /dev/null 2>&1; then \
-          echo \"Created and switched to branch '$branch' tracking '$remote/$branch'.\"; \
-        else \
-          git switch -c \"$branch\"; \
-          echo \"Created local branch '$branch'. Remote branch '$remote/$branch' not found.\"; \
-        fi; \
-      else \
-        echo \"Failed to fetch from remote '$remote'.\"; \
-      fi; \
-    fi; \
-} && f \"$1\" \"$2\""
+		branch=\"$1\"; \
+		remote=\"${2:-origin}\"; \
+		if git show-ref --verify --quiet \"refs/heads/$branch\"; then \
+			echo \"[INFO] Switching to existing local branch: $branch\"; \
+			git checkout \"$branch\"; \
+		else \
+			echo \"[INFO] Local branch not found. Fetching from $remote...\"; \
+			git fetch \"$remote\"; \
+			if git ls-remote --exit-code --heads \"$remote\" \"$branch\" > /dev/null; then \
+				echo \"[INFO] Remote branch found. Creating local branch tracking $remote/$branch\"; \
+				git checkout -b \"$branch\" --track \"$remote/$branch\"; \
+			else \
+				echo \"[INFO] Remote branch not found. Creating new local branch: $branch\"; \
+				git checkout -b \"$branch\"; \
+			fi; \
+		fi; \
+	}; f"
 
 [branch]	
 	sort = -committerdate

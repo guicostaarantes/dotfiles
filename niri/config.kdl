@@ -1,0 +1,118 @@
+// Check the wiki for a full description of the configuration:
+// https://github.com/YaLTeR/niri/wiki/Configuration:-Introduction
+
+hotkey-overlay {
+    skip-at-startup
+}
+
+input {
+    keyboard {
+        xkb {
+            layout "us,us"
+            variant ",intl"
+            options "grp:alt_space_toggle"
+        }
+    }
+
+    warp-mouse-to-focus
+    focus-follows-mouse
+}
+
+layout {
+    gaps 16
+    center-focused-column "never"
+
+    default-column-width { proportion 0.5; }
+    focus-ring {
+        width 4
+        active-gradient from="#33ccff" to="#00ff99" angle=45
+    }
+
+    tab-indicator {
+        // place-within-column
+        gap 6
+        width 4
+    }
+}
+
+spawn-at-startup "xwayland-satellite"
+environment {
+    DISPLAY ":0"
+}
+
+spawn-at-startup "waybar"
+
+prefer-no-csd
+
+screenshot-path "~/Pictures/Screenshots/Screenshot from %Y-%m-%d %H-%M-%S.png"
+
+animations {
+    // off
+    slowdown 0.5
+}
+
+window-rule {
+    match app-id=r#"bitwarden"#
+    block-out-from "screen-capture"
+    open-floating true
+}
+
+window-rule {
+    geometry-corner-radius 6
+    clip-to-geometry true
+}
+
+binds {
+    Mod+Q       { close-window; }
+    Mod+W       { toggle-column-tabbed-display; }
+    Mod+F       { fullscreen-window; }
+    Mod+P       { screenshot; }
+    // Mod+B    {  }
+
+    Mod+A { spawn "kitty"; }
+    Mod+R { spawn "brave"; }
+    // Mod+S { spawn "wofi" "-S" "drun"; }
+    Mod+S { spawn "fuzzel"; }
+    Mod+T { toggle-column-tabbed-display; }
+    // Mod+G { switch-preset-column-width; }
+
+    Mod+Z      { set-column-width "-10%"; }
+    Mod+X      { set-column-width "+10%"; }
+    Mod+C      { center-column; }
+    Mod+D      { fullscreen-window; }
+    Mod+V      { toggle-window-floating; }
+
+    Mod+J         { quit; }
+    Mod+L         { move-column-left; }
+    Mod+U         { consume-or-expel-window-left; }
+    Mod+Y         { consume-or-expel-window-right; }
+    Mod+Semicolon { move-column-right; }
+
+    Mod+M repeat=false { toggle-overview; }
+    Mod+N              { focus-column-left; }
+    Mod+E              { focus-window-down; }
+    Mod+I              { focus-window-up; }
+    Mod+O              { focus-column-right; }
+
+    // Mod+K           { }
+    Mod+H           { move-column-to-workspace-down; }
+    Mod+Comma       { focus-workspace-down; }
+    Mod+Period      { focus-workspace-up; }
+    Mod+Shift+Slash { move-column-to-workspace-up; }
+
+    Mod+WheelScrollDown cooldown-ms=150 { focus-workspace-down; }
+    Mod+WheelScrollUp   cooldown-ms=150 { focus-workspace-up; }
+
+    XF86AudioRaiseVolume allow-when-locked=true { spawn "wpctl" "set-volume" "@DEFAULT_AUDIO_SINK@" "0.1+"; }
+    XF86AudioLowerVolume allow-when-locked=true { spawn "wpctl" "set-volume" "@DEFAULT_AUDIO_SINK@" "0.1-"; }
+    XF86AudioMute        allow-when-locked=true { spawn "wpctl" "set-mute" "@DEFAULT_AUDIO_SINK@" "toggle"; }
+    XF86AudioMicMute     allow-when-locked=true { spawn "wpctl" "set-mute" "@DEFAULT_AUDIO_SOURCE@" "toggle"; }
+}
+
+output "HDMI-A-3" {
+    position x=0 y=0
+}
+
+output "DP-2" {
+    position x=0 y=0
+}
