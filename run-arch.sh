@@ -49,20 +49,13 @@ sudo pacman -Sy --needed --noconfirm \
 # Niri packages and settings
 yay -Sy --needed --noconfirm \
 	cliphist \
-	fuzzel \
 	ibus \
-	jq \
-	mako \
 	ly \
 	nautilus \
 	niri \
 	noto-fonts-emoji \
 	polkit-gnome \
-	swaybg \
-	swayidle \
-	swaylock \
 	xwayland-satellite \
-	waybar \
 	wl-clipboard \
 	wljoywake
 sudo systemctl enable ly.service
@@ -70,7 +63,6 @@ sudo systemctl enable ly.service
 # Terminal packages and settings
 yay -Sy --needed --noconfirm \
 	btop \
-	fzf \
 	kitty \
 	neovim \
 	ripgrep \
@@ -100,15 +92,12 @@ SCRIPTPATH=$(readlink -f "$0")
 SCRIPTDIR=$(dirname "$SCRIPTPATH")
 
 ./create_symlink.sh $SCRIPTDIR/fontconfig ~/.config/fontconfig
-./create_symlink.sh $SCRIPTDIR/fuzzel ~/.config/fuzzel
 ./create_symlink.sh $SCRIPTDIR/git/gitconfig ~/.gitconfig
 ./create_symlink.sh $SCRIPTDIR/git/gituser ~/.gituser
 ./create_symlink.sh $SCRIPTDIR/kitty ~/.config/kitty
-./create_symlink.sh $SCRIPTDIR/mako ~/.config/mako
 ./create_symlink.sh $SCRIPTDIR/mime/mimeapps.list ~/.config/mimeapps.list
 ./create_symlink.sh $SCRIPTDIR/niri ~/.config/niri
 ./create_symlink.sh $SCRIPTDIR/nvim ~/.config/nvim
-./create_symlink.sh $SCRIPTDIR/waybar ~/.config/waybar
 ./create_symlink.sh $SCRIPTDIR/xcompose/ptbr ~/.XCompose
 ./create_symlink.sh $SCRIPTDIR/zsh/zshrc-linux ~/.zshrc
 

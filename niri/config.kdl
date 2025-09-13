@@ -47,11 +47,7 @@ environment {
 
 spawn-at-startup "/usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1"
 spawn-at-startup "ibus" "start"
-spawn-at-startup "swaybg" "-i" ".config/niri/wallpapers/sunset.jpg"
-spawn-at-startup "waybar"
 spawn-at-startup "wljoywake"
-spawn-at-startup "swayidle" "-w" "timeout" "180" "swaylock -f -c 000000" "timeout" "190" "niri msg action power-off-monitors" "resume" "niri msg action power-on-monitors"
-spawn-at-startup "swayidle" "-w" "timeout" "10" "if pgrep swaylock; then niri msg action power-off-monitors; fi" "resume" "niri msg action power-on-monitors"
 spawn-at-startup "wl-paste" "--type" "text" "--watch" "sh" ".config/niri/scripts/clipstore.sh"
 spawn-at-startup "wl-paste" "--type" "image" "--watch" "sh" ".config/niri/scripts/clipstore.sh"
 
