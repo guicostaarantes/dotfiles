@@ -49,14 +49,17 @@ sudo pacman -Sy --needed --noconfirm \
 # Niri packages and settings
 yay -Sy --needed --noconfirm \
 	cliphist \
+	dart-sass \
 	hypridle \
 	hyprlock \
 	ibus \
+	ignis-git \
 	ly \
 	nautilus \
 	niri \
 	noto-fonts-emoji \
 	polkit-gnome \
+	python \
 	xwayland-satellite \
 	wl-clipboard \
 	wljoywake

@@ -48,6 +48,7 @@ environment {
 spawn-at-startup "/usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1"
 spawn-at-startup "hypridle"
 spawn-at-startup "ibus" "start"
+spawn-at-startup "ignis" "init"
 spawn-at-startup "wljoywake"
 spawn-at-startup "wl-paste" "--type" "text" "--watch" "sh" ".config/niri/scripts/clipstore.sh"
 spawn-at-startup "wl-paste" "--type" "image" "--watch" "sh" ".config/niri/scripts/clipstore.sh"
@@ -76,11 +77,11 @@ binds {
     Mod+W { spawn "sh" ".config/niri/scripts/toggle-waybar.sh"; }
     Mod+F { fullscreen-window; }
     Mod+P { screenshot; }
-    Mod+B { spawn "swaylock" "-f" "-c" "000000"; }
+    Mod+B { spawn "ignis" "open-window" "ignis_POWERMENU"; }
 
     Mod+A { spawn "kitty"; }
     Mod+R { spawn "brave"; }
-    Mod+S { spawn "fuzzel"; }
+    Mod+S { spawn "ignis" "open-window" "ignis_LAUNCHER"; }
     Mod+T { toggle-column-tabbed-display; }
     Mod+G { spawn "sh" ".config/niri/scripts/emoji.sh"; }
 
@@ -90,7 +91,7 @@ binds {
     Mod+D { toggle-window-floating; }
     Mod+V { spawn "sh" ".config/niri/scripts/clipselect.sh"; }
 
-    Mod+J         { quit; }
+    Mod+J         { spawn "ignis" "open-window" "ignis_POWERMENU"; }
     Mod+L         { move-column-left; }
     Mod+U         { consume-or-expel-window-left; }
     Mod+Y         { consume-or-expel-window-right; }

@@ -175,6 +175,7 @@ require('lazy').setup({
 			lsp.tflint.setup {}
 			lsp.yamlls.setup {}
 			lsp.svelte.setup {}
+			lsp.pylsp.setup {}
 		end
 	},
 
@@ -192,6 +193,7 @@ require('lazy').setup({
 				'javascript',
 				'json',
 				'lua',
+				'python',
 				'rust',
 				'svelte',
 				'tsx',
