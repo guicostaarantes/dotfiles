@@ -49,6 +49,8 @@ sudo pacman -Sy --needed --noconfirm \
 # Niri packages and settings
 yay -Sy --needed --noconfirm \
 	cliphist \
+	hypridle \
+	hyprlock \
 	ibus \
 	ly \
 	nautilus \
@@ -94,6 +96,7 @@ SCRIPTDIR=$(dirname "$SCRIPTPATH")
 ./create_symlink.sh $SCRIPTDIR/fontconfig ~/.config/fontconfig
 ./create_symlink.sh $SCRIPTDIR/git/gitconfig ~/.gitconfig
 ./create_symlink.sh $SCRIPTDIR/git/gituser ~/.gituser
+./create_symlink.sh $SCRIPTDIR/hypr ~/.config/hypr
 ./create_symlink.sh $SCRIPTDIR/kitty ~/.config/kitty
 ./create_symlink.sh $SCRIPTDIR/mime/mimeapps.list ~/.config/mimeapps.list
 ./create_symlink.sh $SCRIPTDIR/niri ~/.config/niri

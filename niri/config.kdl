@@ -37,7 +37,7 @@ layout {
     tab-indicator {
         // place-within-column
         gap 6
-        width 2
+        width 4
     }
 }
 
@@ -46,6 +46,7 @@ environment {
 }
 
 spawn-at-startup "/usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1"
+spawn-at-startup "hypridle"
 spawn-at-startup "ibus" "start"
 spawn-at-startup "wljoywake"
 spawn-at-startup "wl-paste" "--type" "text" "--watch" "sh" ".config/niri/scripts/clipstore.sh"
