@@ -1,0 +1,21 @@
+# Start starship and zoxide
+eval "$(starship init zsh)"
+eval "$(zoxide init zsh)"
+
+# Store the latest 10000 commands ran in zsh for auto-completion
+source /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
+export HISTFILE="$HOME/.zsh_history"
+export HISTSIZE=10000
+export SAVEHIST=10000
+
+# Needed to use Bitwarden as SSH agent
+export SSH_AUTH_SOCK="$HOME/.bitwarden-ssh-agent.sock"
+
+# Needed to run nvm - nodejs version manager
+source /usr/share/nvm/init-nvm.sh
+
+# Useful commands as aliases
+alias l="ls -alh --color=auto"
+alias v="nvim ."
+alias sv="sudo -E nvim ."
+

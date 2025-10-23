@@ -1,5 +1,9 @@
 # My dotfiles
 
-Helps for installing a new environment and also for sharing with others :)
+Scripts and config files to install and update my systems.
 
-Scripts run-arch.sh and run-macos.sh are idempotent, so they can be used in a newly installed system or be updated + re-run when changes need to be made.
+`arch-install.sh` wipes a disk and installs Arch Linux in it.
+
+`arch-setup.sh` installs packages, enables services and creates symlinks for config files.
+
+`arch-setup.sh` is an idempotent script, which means that running it multiple times should not cause errors. While it is possible to add packages to the system by manually running `pacman` or `yay`, it is preferred to add them to `arch-setup.sh` and then re-run the script. This way the package gets consolidated in the repository and will be installed in future setups.
