@@ -70,6 +70,7 @@ sudo systemctl enable ly
 yay -Sy --needed --noconfirm \
 	btop \
 	git \
+	less \
 	neovim \
 	ripgrep \
 	starship \
@@ -83,6 +84,7 @@ sudo chsh -s /bin/zsh $(whoami)
 yay -Sy --needed --noconfirm \
 	android-sdk-cmdline-tools-latest \
 	jdk17-openjdk \
+	lua-language-server \
 	mkcert \
 	nvm \
 	pyenv \

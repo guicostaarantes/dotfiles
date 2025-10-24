@@ -156,25 +156,15 @@ require('lazy').setup({
 	{
 		'neovim/nvim-lspconfig',
 		init = function()
-			local lsp = require('lspconfig')
-			lsp.ts_ls.setup {}
-			lsp.jsonls.setup {}
-			lsp.lua_ls.setup {
-				settings = {
-					Lua = {
-						diagnostics = {
-							globals = { 'vim' }
-						}
-					}
-				}
-			}
-			lsp.rust_analyzer.setup {}
-			lsp.gopls.setup {}
-			lsp.nixd.setup {}
-			lsp.terraformls.setup {}
-			lsp.tflint.setup {}
-			lsp.yamlls.setup {}
-			lsp.svelte.setup {}
+			vim.lsp.config("gopls", {})
+			vim.lsp.config("jsonls", {})
+			vim.lsp.config("lua_ls", {})
+			vim.lsp.config("rust_analyzer", {})
+			vim.lsp.config("svelte", {})
+			vim.lsp.config("terraformls", {})
+			vim.lsp.config("tflint", {})
+			vim.lsp.config("ts_ls", {})
+			vim.lsp.config("yamlls", {})
 		end
 	},
 
