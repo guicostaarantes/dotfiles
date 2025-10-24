@@ -17,7 +17,7 @@ input {
 }
 
 layout {
-    gaps 16
+    gaps 10
     center-focused-column "never"
     always-center-single-column
 
@@ -47,13 +47,8 @@ environment {
 
 spawn-at-startup "/usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1"
 spawn-at-startup "ibus" "start"
-spawn-at-startup "swaybg" "-i" ".config/niri/wallpapers/sunset.jpg"
-spawn-at-startup "waybar"
-spawn-at-startup "wljoywake"
-spawn-at-startup "swayidle" "-w" "timeout" "180" "swaylock -f -c 000000" "timeout" "190" "niri msg action power-off-monitors" "resume" "niri msg action power-on-monitors"
-spawn-at-startup "swayidle" "-w" "timeout" "10" "if pgrep swaylock; then niri msg action power-off-monitors; fi" "resume" "niri msg action power-on-monitors"
-spawn-at-startup "wl-paste" "--type" "text" "--watch" "sh" ".config/niri/scripts/clipstore.sh"
-spawn-at-startup "wl-paste" "--type" "image" "--watch" "sh" ".config/niri/scripts/clipstore.sh"
+spawn-at-startup "dms" "run"
+spawn-at-startup "bash" "-c" "wl-paste --watch cliphist store &"
 
 prefer-no-csd
 
@@ -79,19 +74,19 @@ binds {
     Mod+W { spawn "sh" ".config/niri/scripts/toggle-waybar.sh"; }
     Mod+F { fullscreen-window; }
     Mod+P { screenshot; }
-    Mod+B { spawn "swaylock" "-f" "-c" "000000"; }
+    Mod+B { spawn "dms" "ipc" "call" "lock" "lock"; }
 
     Mod+A { spawn "kitty"; }
     Mod+R { spawn "brave"; }
-    Mod+S { spawn "fuzzel"; }
+    Mod+S { spawn "dms" "ipc" "call" "spotlight" "toggle"; }
     Mod+T { toggle-column-tabbed-display; }
-    Mod+G { spawn "sh" ".config/niri/scripts/emoji.sh"; }
+    // Mod+G { }
 
     Mod+Z { set-column-width "-5%"; }
     Mod+X { set-column-width "+5%"; }
     Mod+C { center-column; }
     Mod+D { toggle-window-floating; }
-    Mod+V { spawn "sh" ".config/niri/scripts/clipselect.sh"; }
+    Mod+V { spawn "dms" "ipc" "call" "clipboard" "toggle"; }
 
     Mod+J         { quit; }
     Mod+L         { move-column-left; }

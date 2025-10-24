@@ -45,24 +45,17 @@ systemctl --user enable wireplumber
 yay -Sy --needed --noconfirm \
 	bitwarden \
 	cliphist \
+	dms-shell-bin \
 	firefox \
 	fuse \
-	fuzzel \
 	ibus \
-	jq \
 	kitty \
 	ly \
-	mako \
 	nautilus \
 	niri \
 	noto-fonts-emoji \
 	polkit-gnome \
-	swaybg \
-	swayidle \
-	swaylock \
-	waybar \
 	wl-clipboard \
-	wljoywake \
 	xwayland-satellite
 sudo systemctl enable ly
 
@@ -70,6 +63,7 @@ sudo systemctl enable ly
 yay -Sy --needed --noconfirm \
 	btop \
 	git \
+	jq \
 	less \
 	neovim \
 	ripgrep \
