@@ -23,21 +23,21 @@ layout {
 
     default-column-width { proportion 0.5; }
     preset-column-widths {
-        proportion 0.33333
+        proportion 0.3
         proportion 0.5
-        proportion 0.66666
+        proportion 0.7
         proportion 1.0
     }
 
     focus-ring {
-        width 2
-        active-gradient from="#33ccff" to="#00ff99" angle=45
+        width 3
+        active-color "#ff0000"
     }
 
     tab-indicator {
-        // place-within-column
+        place-within-column
         gap 6
-        width 2
+        width 6
     }
 }
 
@@ -47,13 +47,12 @@ environment {
 
 spawn-at-startup "/usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1"
 spawn-at-startup "ibus" "start"
-spawn-at-startup "swaybg" "-i" ".config/niri/wallpapers/sunset.jpg"
+spawn-at-startup "swaybg" "-m" "fill" "-i" ".config/niri/wallpapers/sunset.jpg"
 spawn-at-startup "waybar"
 spawn-at-startup "wljoywake"
-spawn-at-startup "swayidle" "-w" "timeout" "180" "swaylock -f -c 000000" "timeout" "190" "niri msg action power-off-monitors" "resume" "niri msg action power-on-monitors"
-spawn-at-startup "swayidle" "-w" "timeout" "10" "if pgrep swaylock; then niri msg action power-off-monitors; fi" "resume" "niri msg action power-on-monitors"
 spawn-at-startup "wl-paste" "--type" "text" "--watch" "sh" ".config/niri/scripts/clipstore.sh"
 spawn-at-startup "wl-paste" "--type" "image" "--watch" "sh" ".config/niri/scripts/clipstore.sh"
+spawn-at-startup "swayidle" "-w" "timeout" "180" "swaylock -f -i .config/niri/wallpapers/sunset.jpg" "timeout" "1800" "niri msg action power-off-monitors" "resume" "niri msg action power-on-monitors"
 
 prefer-no-csd
 
@@ -79,16 +78,16 @@ binds {
     Mod+W { spawn "sh" ".config/niri/scripts/toggle-waybar.sh"; }
     Mod+F { fullscreen-window; }
     Mod+P { screenshot; }
-    Mod+B { spawn "swaylock" "-f" "-c" "000000"; }
+    Mod+B { spawn "swaylock" "-f" "-i" ".config/niri/wallpapers/sunset.jpg"; }
 
     Mod+A { spawn "kitty"; }
-    Mod+R { spawn "brave"; }
+    Mod+R { spawn "firefox"; }
     Mod+S { spawn "fuzzel"; }
     Mod+T { toggle-column-tabbed-display; }
     Mod+G { spawn "sh" ".config/niri/scripts/emoji.sh"; }
 
-    Mod+Z { set-column-width "-5%"; }
-    Mod+X { set-column-width "+5%"; }
+    Mod+Z { set-column-width "-10%"; }
+    Mod+X { set-column-width "+10%"; }
     Mod+C { center-column; }
     Mod+D { toggle-window-floating; }
     Mod+V { spawn "sh" ".config/niri/scripts/clipselect.sh"; }
@@ -105,7 +104,7 @@ binds {
     Mod+I              { focus-window-up; }
     Mod+O              { focus-column-right; }
 
-    // Mod+K           { }
+    Mod+K           { spawn "sh" ".config/niri/scripts/powermenu.sh"; }
     Mod+H           { move-column-to-workspace-down; }
     Mod+Comma       { focus-workspace-down; }
     Mod+Period      { focus-workspace-up; }
