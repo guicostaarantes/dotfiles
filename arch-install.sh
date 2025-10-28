@@ -261,7 +261,7 @@ bootloader_config() {
 
 password_set() {
 	print "Setting hostname."
-	hostnamectl set-hostname $hostname
+	arch-chroot /mnt hostnamectl set-hostname $hostname
 
 	print "Setting root password."
 	echo "root:$password" | arch-chroot /mnt chpasswd
