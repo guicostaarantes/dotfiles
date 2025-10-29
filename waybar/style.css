@@ -29,7 +29,7 @@ window#waybar {
 window > box {
 	margin-left: 16px;
 	margin-right: 16px;
-	margin-top: 8px;
+	margin-top: 16px;
 	background-color: #131313;
 	opacity: 0.8;
 	border-radius: 6px;

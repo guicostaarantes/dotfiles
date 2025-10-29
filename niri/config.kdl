@@ -68,6 +68,11 @@ window-rule {
     // opacity 0.5
 }
 
+layer-rule {
+    match namespace="^notifications$"
+    baba-is-float true
+}
+
 window-rule {
     geometry-corner-radius 10
     clip-to-geometry true
