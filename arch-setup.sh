@@ -49,6 +49,7 @@ yay -Sy --needed --noconfirm \
 	fuse \
 	fuzzel \
 	ibus \
+	ibus-uniemoji \
 	jq \
 	kitty \
 	ly \
@@ -100,14 +101,17 @@ sudo usermod -aG libvirt-qemu $(whoami)
 # Set up other packages
 yay -Sy --needed --noconfirm \
 	alvr-launcher-bin \
+	blender \
 	bottles \
 	distrobox \
 	inkscape \
 	libreoffice-still \
 	podman \
+	obs-studio \
 	qbittorrent \
 	steam \
-	vesktop-bin
+	vesktop-bin \
+	vial
 
 # Symlinks
 ./dotfiles-symlinks.sh
