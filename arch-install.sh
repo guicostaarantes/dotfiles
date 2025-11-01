@@ -5,7 +5,6 @@ mirrors_country="Brazil"
 timezone="America/Sao_Paulo"
 keymap="us"
 locale="en_US.UTF-8"
-pkgs_extra=(git neovim)
 
 main() {
 	unmount_cryptroot
@@ -13,8 +12,8 @@ main() {
 	name_select
 	password_select
 	hardware_detect
-	partition_disk
-	filesystem_setup
+	wipe_partition_disk
+	format_partitions
 	pacman_mirrors
 	basesystem_install
 	bootloader_config
@@ -27,7 +26,6 @@ main() {
 	mirrors_config
 	boot_backup_hook
 	zram_config
-	dns_config
 	services_enable
 
 	print "Done, you may now wish to reboot."
@@ -83,27 +81,33 @@ hardware_detect() {
 	if [[ $cpu == *"AuthenticAMD"* ]]; then
 		cpu_type="AMD"
 		microcode="amd-ucode"
-		video_drivers=(libva-mesa-driver xf86-video-amdgpu)
+		drivers=(libva-mesa-driver xf86-video-amdgpu)
 	else
 		cpu_type="Intel"
 		microcode="intel-ucode"
-		video_drivers=(intel-media-driver libva-intel-driver xf86-video-intel)
+		drivers=(intel-media-driver libva-intel-driver xf86-video-intel)
 	fi
 
 	print "An $cpu_type CPU has been detected."
 
 	if lspci | grep -i nvidia > /dev/null; then
 		print "An NVIDIA GPU has been detected."
-		video_drivers+=(nvidia-open nvidia-utils libva-nvidia-driver)
+		drivers+=(nvidia-open nvidia-utils libva-nvidia-driver)
 	fi
 
 	if lspci | grep -i bcm4360 > /dev/null; then
 		print "A Broadcom BCM4360 wireless adapter has been detected."
-		pkgs_extra+=(broadcom-wl)
+		drivers+=(broadcom-wl)
 	fi
 }
 
-partition_disk() {
+wipe_partition_disk() {
+	read -rp "All data stored in $disk will be destroyed. Are you sure to continue? [yes/NO]: " confirm
+	if [[ "$confirm" != "yes" ]]; then
+		print "Aborted since answer was not \"yes\"."
+		exit 1
+	fi
+
 	print "Wiping $disk."
 
 	wipefs -af "$disk" &> /dev/null
@@ -118,9 +122,9 @@ partition_disk() {
 		mkpart root 2GiB 100%
 
 	partprobe "$disk"
+}
 
-	print "Formatting boot partition."
-
+format_partitions() {
 	if grep -q "^/dev/nvme" <<< "$disk"; then
 		boot_partition="${disk}p1"
 		root_partition="${disk}p2"
@@ -129,30 +133,36 @@ partition_disk() {
 		root_partition="${disk}2"
 	fi
 
+	print "Formatting boot partition."
+
 	mkfs.fat -F 32 "$boot_partition" &> /dev/null
+
+	btrfs_setup
 	
+	print "Mounting boot partition."
+	mount "$boot_partition" /mnt/boot/
 }
 
-filesystem_setup() {
-	print "Creating LUKS container for the root partition."
+btrfs_setup() {
+	print "Encrypting root partition."
 
 	echo -n "$password" | cryptsetup luksFormat "$root_partition" -d -
 	echo -n "$password" | cryptsetup open "$root_partition" cryptroot -d -
 	cryptroot="/dev/mapper/cryptroot"
 
-	print "Formatting the LUKS container as BTRFS."
+	print "Formatting root partition."
 	mkfs.btrfs $cryptroot &> /dev/null
 	mount $cryptroot /mnt
 
 	print "Creating BTRFS subvolumes."
 	for volume in @ @home @hcache @root @vlog @vcache; do
-		btrfs su cr /mnt/$volume &> /dev/null
+		btrfs subvolume create /mnt/$volume &> /dev/null
 	done
 
 	mkdir /mnt/@root/live
 	mkdir /mnt/@home/live
-	btrfs su cr /mnt/@root/live/snapshot &> /dev/null
-	btrfs su cr /mnt/@home/live/snapshot &> /dev/null
+	btrfs subvolume create /mnt/@root/live/snapshot &> /dev/null
+	btrfs subvolume create /mnt/@home/live/snapshot &> /dev/null
 
 	print "Mounting the newly created subvolumes."
 	umount /mnt
@@ -174,14 +184,13 @@ filesystem_setup() {
 	chattr +C /mnt/var/log
 	chattr +C /mnt/var/cache
 	chattr +C /mnt/home/$username/.cache
-
-	mount "$boot_partition" /mnt/boot/
 }
 
 pacman_mirrors() {
 	print "Updating pacman mirrors."
 
-	reflector --country $mirrors_country \
+	reflector \
+		--country $mirrors_country \
 		--latest 25 \
 		--age 24 \
 		--protocol https \
@@ -204,7 +213,6 @@ basesystem_install() {
 		base
 		base-devel
 		btrfs-progs
-		dnsmasq
 		linux
 		linux-firmware
 		networkmanager
@@ -214,7 +222,7 @@ basesystem_install() {
 		zram-generator
 	)
 
-	yes '' | pacstrap /mnt "${pkgs[@]}" $microcode "${video_drivers[@]}" "${pkgs_extra[@]}"
+	yes '' | pacstrap /mnt $microcode "${drivers[@]}" "${pkgs[@]}"
 
 	print "Setting hosts file."
 	cat > /mnt/etc/hosts <<- EOF
@@ -279,6 +287,7 @@ localization_config() {
 
 	ln -sf /mnt/usr/share/zoneinfo/"$timezone" /mnt/etc/localtime &> /dev/null
 	arch-chroot /mnt hwclock --systohc
+	arch-chroot /mnt timedatectl set-ntp 1 &> /dev/null
 
 	echo "KEYMAP=$keymap" > /mnt/etc/vconsole.conf
 	echo "$locale UTF-8" > /mnt/etc/locale.gen
@@ -290,8 +299,7 @@ localization_config() {
 home_dir_setup() {
 	print "Setting up home directory."
 
-	mkdir -p /mnt/home/$username/.local/vm
-	chattr +C /mnt/home/$username/.local/vm
+	mkdir -p /mnt/home/$username
 	arch-chroot /mnt chown -R $username:$username /home/$username
 }
 
@@ -393,29 +401,11 @@ zram_config() {
 	EOF
 }
 
-dns_config() {
-	print "Configuring DNS."
-
-	mkdir -p /mnt/etc/NetworkManager/conf.d
-	mkdir -p /mnt/etc/NetworkManager/dnsmasq.d
-
-	cat > /mnt/etc/NetworkManager/conf.d/dns.conf <<- EOF
-		[main]
-		dns=dnsmasq
-	EOF
-
-	# Example: direct "*.nomad" domains to 192.168.1.160
-	# cat > /mnt/etc/NetworkManager/dnsmasq.d/hosts.conf <<- EOF
-	# 	address=/nomad/192.168.1.160
-	# EOF
-}
-
 services_enable() {
 	print "Enabling services."
 
 	services=(
 		archlinux-keyring-wkd-sync.timer
-		btrfs-scrub@-.timer
 		NetworkManager.service
 		linux-modules-cleanup.service
 		reflector.timer
@@ -426,7 +416,7 @@ services_enable() {
 	)
 
 	for service in "${services[@]}"; do
-		systemctl enable "$service" --root=/mnt &> /dev/null
+		arch-chroot /mnt systemctl enable "$service" &> /dev/null
 	done
 }
 
