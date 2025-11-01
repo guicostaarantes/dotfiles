@@ -6,7 +6,7 @@ selected=$(echo -e $entries | fuzzel --dmenu)
 
 case $selected in
   Lock)
-    swaylock -f -c 000000;;
+    swaylock -f -i .config/niri/wallpapers/wallhaven-5g22q5.png;;
   Reboot)
     shutdown -r now;;
   Shutdown)

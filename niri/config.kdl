@@ -47,12 +47,12 @@ environment {
 
 spawn-at-startup "/usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1"
 spawn-at-startup "ibus" "start"
-spawn-at-startup "swaybg" "-m" "fill" "-i" ".config/niri/wallpapers/sunset.jpg"
+spawn-at-startup "swaybg" "-m" "fill" "-i" ".config/niri/wallpapers/wallhaven-5g22q5.png"
 spawn-at-startup "waybar"
 spawn-at-startup "wljoywake"
 spawn-at-startup "wl-paste" "--type" "text" "--watch" "sh" ".config/niri/scripts/clipstore.sh"
 spawn-at-startup "wl-paste" "--type" "image" "--watch" "sh" ".config/niri/scripts/clipstore.sh"
-spawn-at-startup "swayidle" "-w" "timeout" "180" "swaylock -f -i .config/niri/wallpapers/sunset.jpg" "timeout" "1800" "niri msg action power-off-monitors" "resume" "niri msg action power-on-monitors"
+spawn-at-startup "swayidle" "-w" "timeout" "180" "swaylock -f -i .config/niri/wallpapers/wallhaven-5g22q5.png" "timeout" "1800" "niri msg action power-off-monitors" "resume" "niri msg action power-on-monitors"
 
 prefer-no-csd
 
@@ -79,11 +79,11 @@ window-rule {
 }
 
 binds {
-    Mod+Q { close-window; }
-    Mod+W { spawn "sh" ".config/niri/scripts/toggle-waybar.sh"; }
-    Mod+F { fullscreen-window; }
-    Mod+P { screenshot; }
-    Mod+B { spawn "swaylock" "-f" "-i" ".config/niri/wallpapers/sunset.jpg"; }
+    Mod+Q                        { close-window; }
+    Mod+W                        { spawn "sh" ".config/niri/scripts/toggle-waybar.sh"; }
+    Mod+F                        { fullscreen-window; }
+    Mod+P                        { screenshot; }
+    Mod+B allow-when-locked=true { spawn "swaylock" "-f" "-i" ".config/niri/wallpapers/wallhaven-5g22q5.png"; }
 
     Mod+A { spawn "kitty"; }
     Mod+R { spawn "firefox"; }
@@ -91,37 +91,40 @@ binds {
     Mod+T { toggle-column-tabbed-display; }
     Mod+G { spawn "sh" ".config/niri/scripts/emoji.sh"; }
 
-    Mod+Z { set-column-width "-10%"; }
-    Mod+X { set-column-width "+10%"; }
+    Mod+Z { set-column-width "-5%"; }
+    Mod+X { set-column-width "+5%"; }
     Mod+C { center-column; }
     Mod+D { toggle-window-floating; }
     Mod+V { spawn "sh" ".config/niri/scripts/clipselect.sh"; }
 
     Mod+J         { quit; }
-    Mod+L         { move-column-left; }
     Mod+U         { consume-or-expel-window-left; }
     Mod+Y         { consume-or-expel-window-right; }
     Mod+Semicolon { move-column-right; }
 
     Mod+M repeat=false { toggle-overview; }
     Mod+N              { focus-column-left; }
+    Mod+Alt+N          { move-column-left; }
     Mod+E              { focus-window-down; }
+    Mod+Alt+E          { move-window-down; }
     Mod+I              { focus-window-up; }
+    Mod+Alt+I          { move-window-up; }
     Mod+O              { focus-column-right; }
+    Mod+Alt+O          { move-column-right; }
 
-    Mod+K           { spawn "sh" ".config/niri/scripts/powermenu.sh"; }
-    Mod+H           { move-column-to-workspace-down; }
-    Mod+Comma       { focus-workspace-down; }
-    Mod+Period      { focus-workspace-up; }
-    Mod+Shift+Slash { move-column-to-workspace-up; }
+    Mod+K          { spawn "sh" ".config/niri/scripts/powermenu.sh"; }
+    Mod+Comma      { focus-workspace-down; }
+    Mod+Alt+Comma  { move-column-to-workspace-down; }
+    Mod+Period     { focus-workspace-up; }
+    Mod+Alt+Period { move-column-to-workspace-up; }
 
     Mod+WheelScrollDown cooldown-ms=150 { focus-workspace-down; }
     Mod+WheelScrollUp   cooldown-ms=150 { focus-workspace-up; }
 
-    XF86AudioRaiseVolume allow-when-locked=true { spawn "wpctl" "set-volume" "@DEFAULT_AUDIO_SINK@" "0.02+"; }
-    XF86AudioLowerVolume allow-when-locked=true { spawn "wpctl" "set-volume" "@DEFAULT_AUDIO_SINK@" "0.02-"; }
-    XF86AudioMute        allow-when-locked=true { spawn "wpctl" "set-mute" "@DEFAULT_AUDIO_SINK@" "toggle"; }
-    XF86AudioMicMute     allow-when-locked=true { spawn "wpctl" "set-mute" "@DEFAULT_AUDIO_SOURCE@" "toggle"; }
+    XF86AudioRaiseVolume { spawn "wpctl" "set-volume" "@DEFAULT_AUDIO_SINK@" "0.02+"; }
+    XF86AudioLowerVolume { spawn "wpctl" "set-volume" "@DEFAULT_AUDIO_SINK@" "0.02-"; }
+    XF86AudioMute        { spawn "wpctl" "set-mute" "@DEFAULT_AUDIO_SINK@" "toggle"; }
+    XF86AudioMicMute     { spawn "wpctl" "set-mute" "@DEFAULT_AUDIO_SOURCE@" "toggle"; }
 }
 
 output "LG Electronics LG ULTRAWIDE 307AZGF3R783" {
