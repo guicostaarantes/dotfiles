@@ -13,7 +13,7 @@ input {
     }
 
     warp-mouse-to-focus
-    // focus-follows-mouse
+    focus-follows-mouse max-scroll-amount="0%"
 }
 
 layout {
@@ -31,7 +31,7 @@ layout {
 
     focus-ring {
         width 3
-        active-color "#ff0000"
+        active-color "#00ffff"
     }
 
     tab-indicator {
@@ -82,6 +82,7 @@ binds {
     Mod+Q                        { close-window; }
     Mod+W                        { spawn "sh" ".config/niri/scripts/toggle-waybar.sh"; }
     Mod+F                        { fullscreen-window; }
+    Mod+Alt+F                    { toggle-windowed-fullscreen; }
     Mod+P                        { screenshot; }
     Mod+B allow-when-locked=true { spawn "swaylock" "-f" "-i" ".config/niri/wallpapers/wallhaven-5g22q5.png"; }
 
@@ -100,7 +101,6 @@ binds {
     Mod+J         { quit; }
     Mod+U         { consume-or-expel-window-left; }
     Mod+Y         { consume-or-expel-window-right; }
-    Mod+Semicolon { move-column-right; }
 
     Mod+M repeat=false { toggle-overview; }
     Mod+N              { focus-column-left; }

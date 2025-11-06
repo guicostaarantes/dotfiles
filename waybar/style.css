@@ -1,10 +1,6 @@
 * {
 	font-family: "Iosevka Nerd Font";
-	font-size: 16px;
-	font-weight: bold;
-	border-radius: 8px;
-	transition-property: background-color;
-	transition-duration: 0.5s;
+	font-size: 18px;
 }
 
 @keyframes blink_red {
@@ -27,14 +23,13 @@ window#waybar {
 }
 
 window > box {
+	margin-top: 16px;
 	margin-left: 16px;
 	margin-right: 16px;
-	margin-top: 16px;
-	background-color: #131313;
-	opacity: 0.8;
 	border-radius: 6px;
 	padding: 6px;
 	border: 2px none #33ccff;
+	background-color: rgba(0,0,0,0.5);
 }
 
 #workspaces {
