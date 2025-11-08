@@ -15,6 +15,12 @@ SCRIPTDIR=$(dirname "$SCRIPTPATH")
 
 sudo ./make-symlink.sh $SCRIPTDIR/udev/rules.d /etc/udev/rules.d
 
+for file in $SCRIPTDIR/apps/*; do
+  if [ -f "$file" ]; then
+    ./make-symlink.sh $file $HOME/.local/share/applications/$(basename $file)
+  fi
+done
+
 # This contains personal info which should not be tied to the repo
 if [ ! -f $HOME/.gituser ]; then
 	cp $SCRIPTDIR/git/gituser $HOME/.gituser

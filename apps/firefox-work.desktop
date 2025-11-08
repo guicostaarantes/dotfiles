@@ -1,0 +1,6 @@
+[Desktop Entry]
+Exec=firefox -P Work
+Icon=firefox
+Name=Firefox (Work)
+Terminal=false
+Type=Application

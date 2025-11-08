@@ -1,0 +1,6 @@
+[Desktop Entry]
+Exec=wiremix
+Icon=kitty
+Name=Volume
+Terminal=true
+Type=Application
