@@ -12,28 +12,18 @@
         "clock",
     ],
     "modules-right": [
+        "tray",
         "pulseaudio",
         "backlight",
-        // "keyboard-state",
         "battery",
-        "tray",
         "idle_inhibitor",
         "custom/power"
     ],
-    "keyboard-state": {
-        "numlock": true,
-        "capslock": true,
-        "format": "{name} {icon}",
-        "format-icons": {
-            "locked": "",
-            "unlocked": ""
-        }
-    },
     "idle_inhibitor": {
         "format": "{icon} ",
         "format-icons": {
-            "activated": "",
-            "deactivated": ""
+            "activated": "󰒳",
+            "deactivated": "󰒲"
         }
     },
     "tray": {
@@ -42,10 +32,11 @@
     "clock": {
         "tooltip": true,
         "interval": 1,
-        "format": "{:%a %b %d | %H:%M:%S}",
+        "format": "{:%a %b %d | %H:%M:%S  }",
     },
     "cpu": {
-        "format": "  {usage}%"
+        "format": "  {usage}%",
+        "on-click": "fuzzel"
     },
     "memory": {
         "format": "  {}%"
@@ -78,15 +69,11 @@
     },
     "pulseaudio": {
         "scroll-step": 5,
-        "format": "{icon}  {volume}% {format_source}",
-        "format-bluetooth": " {icon} {volume}% {format_source}",
-        "format-bluetooth-muted": " {icon} {format_source}",
+        "format": " {volume}% {format_source}",
+        "format-muted": "  {format_source}",
         "format-source": " {volume}%",
         "format-source-muted": "",
-        "format-icons": {
-            "default": ["", "", "", "", ""]
-        },
-        "on-click": "pavucontrol"
+        "on-click": "kitty -e wiremix"
     },
     "custom/power": {
         "format":"   ", "on-click":"sh $HOME/.config/niri/scripts/powermenu.sh"
