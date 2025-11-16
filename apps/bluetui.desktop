@@ -1,6 +1,6 @@
 [Desktop Entry]
-Exec=bluetuith
+Exec=bluetui
 Icon=kitty
-Name=Bluetuith
+Name=Bluetooth
 Terminal=true
 Type=Application

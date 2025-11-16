@@ -43,6 +43,10 @@ systemctl --user enable wireplumber
 
 # Set up desktop environment
 yay -Sy --needed --noconfirm \
+	extra/polkit-gnome \
+	extra/xdg-desktop-portal-gnome \
+	extra/xdg-desktop-portal-gtk
+yay -Sy --needed --noconfirm \
 	extra/bitwarden \
 	extra/cliphist \
 	extra/firefox \
@@ -57,7 +61,6 @@ yay -Sy --needed --noconfirm \
 	extra/nautilus \
 	extra/niri \
 	extra/noto-fonts-emoji \
-	extra/polkit-gnome \
 	extra/swaybg \
 	extra/swayidle \
 	extra/swaylock \
@@ -70,6 +73,7 @@ sudo systemctl enable ly
 # Set up terminal environment
 yay -Sy --needed --noconfirm \
 	extra/btop \
+	extra/fastfetch \
 	extra/git \
 	extra/less \
 	extra/neovim \

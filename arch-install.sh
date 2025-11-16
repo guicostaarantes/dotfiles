@@ -11,10 +11,10 @@ main() {
 	disk_target
 	name_select
 	password_select
-	hardware_detect
 	wipe_partition_disk
 	format_partitions
 	pacman_mirrors
+	hardware_detect
 	basesystem_install
 	bootloader_config
 	password_set
@@ -26,6 +26,7 @@ main() {
 	mirrors_config
 	boot_backup_hook
 	zram_config
+	# tpm_config
 	services_enable
 
 	print "Done, you may now wish to reboot."
@@ -49,6 +50,8 @@ disk_target() {
 	disks=$(lsblk -dpnoNAME,MODEL,SIZE | grep -P "/dev/sd|nvme|vd")
 
 	echo "Available disks:"
+	lsblk -dpnoNAME,MODEL,SIZE | grep -P "/dev/sd|nvme|vd"
+	echo ""
 	PS3="Select the disk in which to install Arch Linux: "
 	select disk in $(awk '{print $1}' <<< "$disks"); do
 		print "Installing Arch Linux on $disk."
@@ -73,31 +76,6 @@ password_select() {
 	elif [ "$password" != "$password_confirm" ]; then
 		print "Passwords do not match, please try again."
 		password_select
-	fi
-}
-
-hardware_detect() {
-	cpu=$(grep vendor_id /proc/cpuinfo)
-	if [[ $cpu == *"AuthenticAMD"* ]]; then
-		cpu_type="AMD"
-		microcode="amd-ucode"
-		drivers=(libva-mesa-driver xf86-video-amdgpu)
-	else
-		cpu_type="Intel"
-		microcode="intel-ucode"
-		drivers=(intel-media-driver libva-intel-driver xf86-video-intel)
-	fi
-
-	print "An $cpu_type CPU has been detected."
-
-	if lspci | grep -i nvidia > /dev/null; then
-		print "An NVIDIA GPU has been detected."
-		drivers+=(nvidia-open nvidia-utils libva-nvidia-driver)
-	fi
-
-	if lspci | grep -i bcm4360 > /dev/null; then
-		print "A Broadcom BCM4360 wireless adapter has been detected."
-		drivers+=(broadcom-wl)
 	fi
 }
 
@@ -199,6 +177,31 @@ pacman_mirrors() {
 		--save /etc/pacman.d/mirrorlist
 }
 
+hardware_detect() {
+	cpu=$(grep vendor_id /proc/cpuinfo)
+	if [[ $cpu == *"AuthenticAMD"* ]]; then
+		cpu_type="AMD"
+		microcode="amd-ucode"
+		drivers=(libva-mesa-driver xf86-video-amdgpu)
+	else
+		cpu_type="Intel"
+		microcode="intel-ucode"
+		drivers=(intel-media-driver libva-intel-driver xf86-video-intel)
+	fi
+
+	print "An $cpu_type CPU has been detected."
+
+	if lspci | grep -i nvidia > /dev/null; then
+		print "An NVIDIA GPU has been detected."
+		drivers+=(nvidia-open nvidia-utils libva-nvidia-driver)
+	fi
+
+	if lspci | grep -i bcm4360 > /dev/null; then
+		print "A Broadcom BCM4360 wireless adapter has been detected."
+		drivers+=(broadcom-wl)
+	fi
+}
+
 basesystem_install() {
 	print "Installing base system."
 
@@ -269,7 +272,7 @@ bootloader_config() {
 
 password_set() {
 	print "Setting hostname."
-	arch-chroot /mnt hostnamectl set-hostname $hostname
+	echo "$hostname" > /mnt/etc/hostname
 
 	print "Setting root password."
 	echo "root:$password" | arch-chroot /mnt chpasswd
@@ -285,9 +288,8 @@ password_set() {
 localization_config() {
 	print "Configuring localization settings."
 
-	ln -sf /mnt/usr/share/zoneinfo/"$timezone" /mnt/etc/localtime &> /dev/null
+	ln -sf /usr/share/zoneinfo/"$timezone" /mnt/etc/localtime &> /dev/null
 	arch-chroot /mnt hwclock --systohc
-	arch-chroot /mnt timedatectl set-ntp 1 &> /dev/null
 
 	echo "KEYMAP=$keymap" > /mnt/etc/vconsole.conf
 	echo "$locale UTF-8" > /mnt/etc/locale.gen
@@ -399,6 +401,15 @@ zram_config() {
 		zram-fraction = 1
 		max-zram-size = 4096
 	EOF
+}
+
+# TODO: currently not working as expected
+tpm_config() {
+	print "Configuring auto decrypt with TPM."
+	if [[ $(cat /sys/class/tpm/tpm0/device/description) == "TPM 2.0 Device" ]]; then
+		print "This device supports TPM 2.0, will use it to automatically unencrypt the root partition."
+		PASSWORD=$password systemd-cryptenroll $root_partition --tpm2-device=auto --tpm2-pcrs=7
+	fi
 }
 
 services_enable() {
