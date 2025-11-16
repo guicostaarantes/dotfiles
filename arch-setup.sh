@@ -29,13 +29,13 @@ sudo ufw default deny incoming
 
 # Set up audio and bluetooth
 yay -Sy --needed --noconfirm \
-	bluetuith-bin \
-	bluez \
-	bluez-utils \
-	pipewire \
-	pipewire-pulse \
-	wiremix \
-	wireplumber
+	extra/bluetui \
+	extra/bluez \
+	extra/bluez-utils \
+	extra/pipewire \
+	extra/pipewire-pulse \
+	extra/wiremix \
+	extra/wireplumber
 sudo systemctl enable bluetooth
 systemctl --user enable pipewire
 systemctl --user enable pipewire-pulse
@@ -43,75 +43,75 @@ systemctl --user enable wireplumber
 
 # Set up desktop environment
 yay -Sy --needed --noconfirm \
-	bitwarden \
-	cliphist \
-	firefox \
-	fuse \
-	fuzzel \
-	ibus \
-	ibus-uniemoji \
-	jq \
-	kitty \
-	ly \
-	mako \
-	nautilus \
-	niri \
-	noto-fonts-emoji \
-	polkit-gnome \
-	swaybg \
-	swayidle \
-	swaylock \
-	waybar \
-	wl-clipboard \
-	wljoywake \
-	xwayland-satellite
+	extra/bitwarden \
+	extra/cliphist \
+	extra/firefox \
+	extra/fuse2 \
+	extra/fuzzel \
+	extra/ibus \
+	aur/ibus-uniemoji \
+	extra/jq \
+	extra/kitty \
+	extra/ly \
+	extra/mako \
+	extra/nautilus \
+	extra/niri \
+	extra/noto-fonts-emoji \
+	extra/polkit-gnome \
+	extra/swaybg \
+	extra/swayidle \
+	extra/swaylock \
+	extra/waybar \
+	extra/wl-clipboard \
+	aur/wljoywake \
+	extra/xwayland-satellite
 sudo systemctl enable ly
 
 # Set up terminal environment
 yay -Sy --needed --noconfirm \
-	btop \
-	git \
-	less \
-	neovim \
-	ripgrep \
-	starship \
-	ttf-iosevka-nerd \
-	zoxide \
-	zsh \
-	zsh-autosuggestions
+	extra/btop \
+	extra/git \
+	extra/less \
+	extra/neovim \
+	extra/ripgrep \
+	extra/starship \
+	extra/ttf-iosevka-nerd \
+	extra/zoxide \
+	extra/zsh \
+	extra/zsh-autosuggestions
 sudo chsh -s /bin/zsh $(whoami)
 
 # Set up work packages
 yay -Sy --needed --noconfirm \
-	android-sdk-cmdline-tools-latest \
-	jdk17-openjdk \
-	lua-language-server \
-	mkcert \
-	nvm \
-	pyenv \
-	qemu-full \
-	rustup \
-	traefik \
-	typescript-language-server \
-	virt-manager \
-	vscode-json-languageserver
+	aur/android-sdk-cmdline-tools-latest \
+	extra/jdk17-openjdk \
+	extra/lua-language-server \
+	extra/mkcert \
+	extra/nvm \
+	extra/pyenv \
+	extra/qemu-full \
+	extra/rustup \
+	extra/traefik \
+	extra/typescript-language-server \
+	extra/virt-manager \
+	extra/vscode-json-languageserver
 sudo systemctl enable libvirtd.socket
 sudo usermod -aG libvirt-qemu $(whoami)
 
 # Set up other packages
 yay -Sy --needed --noconfirm \
-	alvr-launcher-bin \
-	blender \
-	bottles \
-	distrobox \
-	inkscape \
-	libreoffice-still \
-	podman \
-	obs-studio \
-	qbittorrent \
-	steam \
-	vesktop-bin \
-	vial
+	aur/alvr-bin \
+	extra/blender \
+	aur/faugus-launcher \
+	extra/distrobox \
+	extra/inkscape \
+	extra/libreoffice-still \
+	extra/podman \
+	extra/obs-studio \
+	extra/qbittorrent \
+	multilib/steam \
+	aur/vesktop-bin \
+	aur/vial-appimage
 
 # Symlinks
 ./dotfiles-symlinks.sh
