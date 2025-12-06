@@ -74,7 +74,7 @@ layer-rule {
 }
 
 window-rule {
-    geometry-corner-radius 10
+    geometry-corner-radius 6
     clip-to-geometry true
 }
 
