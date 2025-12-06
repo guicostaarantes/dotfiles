@@ -75,7 +75,7 @@ yay -Sy --needed --noconfirm \
 	extra/btop \
 	extra/fastfetch \
 	extra/git \
-	extra/less \
+	core/less \
 	extra/neovim \
 	extra/ripgrep \
 	extra/starship \
@@ -105,17 +105,22 @@ sudo usermod -aG libvirt-qemu $(whoami)
 # Set up other packages
 yay -Sy --needed --noconfirm \
 	aur/alvr-bin \
+	extra/android-tools \
 	extra/blender \
 	aur/faugus-launcher \
 	extra/distrobox \
+	extra/gamemode \
 	extra/inkscape \
 	extra/libreoffice-still \
+	extra/mangohud \
 	extra/podman \
 	extra/obs-studio \
 	extra/qbittorrent \
 	multilib/steam \
 	aur/vesktop-bin \
-	aur/vial-appimage
+	aur/vial-appimage \
+	extra/vlc \
+	extra/vlc-plugins-all
 
 # Symlinks
 ./dotfiles-symlinks.sh
