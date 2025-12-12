@@ -90,7 +90,7 @@ binds {
     Mod+R { spawn "firefox"; }
     Mod+S { spawn "fuzzel"; }
     Mod+T { toggle-column-tabbed-display; }
-    Mod+G { spawn "sh" ".config/niri/scripts/emoji.sh"; }
+    Mod+G { spawn "sh" ".config/niri/scripts/ibus.sh"; }
 
     Mod+Z { set-column-width "-5%"; }
     Mod+X { set-column-width "+5%"; }

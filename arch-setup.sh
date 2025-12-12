@@ -110,6 +110,7 @@ yay -Sy --needed --noconfirm \
 	aur/faugus-launcher \
 	extra/distrobox \
 	extra/gamemode \
+	extra/gamescope \
 	extra/inkscape \
 	extra/libreoffice-still \
 	extra/mangohud \
