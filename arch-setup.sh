@@ -109,10 +109,11 @@ yay -Sy --needed --noconfirm \
 	aur/alvr-bin \
 	extra/android-tools \
 	extra/blender \
-	aur/faugus-launcher \
+	aur/bottles \
 	extra/distrobox \
 	extra/gamemode \
 	extra/gamescope \
+	extra/gimp \
 	extra/inkscape \
 	extra/libreoffice-still \
 	extra/mangohud \
