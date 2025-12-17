@@ -50,7 +50,6 @@ yay -Sy --needed --noconfirm \
 	extra/bitwarden \
 	extra/brightnessctl \
 	extra/cliphist \
-	extra/firefox \
 	extra/fuse2 \
 	extra/fuzzel \
 	extra/ibus \
@@ -65,6 +64,7 @@ yay -Sy --needed --noconfirm \
 	extra/swaybg \
 	extra/swayidle \
 	extra/swaylock \
+	extra/vivaldi \
 	extra/waybar \
 	extra/wl-clipboard \
 	aur/wljoywake \

@@ -82,7 +82,7 @@ binds {
     Mod+B allow-when-locked=true { spawn "swaylock" "-f" "-i" ".config/niri/wallpapers/wallhaven-5g22q5.png"; }
 
     Mod+A { spawn "kitty"; }
-    Mod+R { spawn "firefox"; }
+    Mod+R { spawn "vivaldi"; }
     Mod+S { spawn "fuzzel"; }
     Mod+T { toggle-column-tabbed-display; }
     Mod+G { spawn "sh" ".config/niri/scripts/ibus.sh"; }
