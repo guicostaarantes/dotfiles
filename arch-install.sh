@@ -423,7 +423,7 @@ services_enable() {
 		snapper-cleanup.timer
 		snapper-timeline.timer
 		systemd-oomd
-		systemd-timesyncd
+		systemd-timesyncd.service
 	)
 
 	for service in "${services[@]}"; do
