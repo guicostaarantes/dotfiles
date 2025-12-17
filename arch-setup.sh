@@ -48,6 +48,7 @@ yay -Sy --needed --noconfirm \
 	extra/xdg-desktop-portal-gtk
 yay -Sy --needed --noconfirm \
 	extra/bitwarden \
+	extra/brightnessctl \
 	extra/cliphist \
 	extra/firefox \
 	extra/fuse2 \
@@ -68,7 +69,8 @@ yay -Sy --needed --noconfirm \
 	extra/wl-clipboard \
 	aur/wljoywake \
 	extra/xwayland-satellite
-sudo systemctl enable ly
+sudo systemctl disable getty@tty2.service
+sudo systemctl enable ly@tty2.service
 
 # Set up terminal environment
 yay -Sy --needed --noconfirm \
