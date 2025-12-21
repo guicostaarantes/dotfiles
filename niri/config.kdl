@@ -53,6 +53,10 @@ prefer-no-csd
 animations {
     // off
     // slowdown 0.5
+
+    workspace-switch {
+        off
+    }
 }
 
 window-rule {
@@ -68,6 +72,11 @@ layer-rule {
     // baba-is-float true
 }
 
+layer-rule {
+    match namespace="^wallpaper$"
+    // place-within-backdrop true
+}
+
 window-rule {
     geometry-corner-radius 6
     clip-to-geometry true
@@ -75,7 +84,7 @@ window-rule {
 
 binds {
     Mod+Q                        { close-window; }
-    Mod+W                        { spawn "sh" ".config/niri/scripts/toggle-waybar.sh"; }
+    Mod+W                        { spawn "sh" ".config/niri/scripts/waybar.sh"; }
     Mod+F                        { fullscreen-window; }
     Mod+Alt+F                    { toggle-windowed-fullscreen; }
     Mod+P                        { screenshot; }
