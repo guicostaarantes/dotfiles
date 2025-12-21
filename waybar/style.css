@@ -23,13 +23,12 @@ window#waybar {
 }
 
 window > box {
-	margin-top: 16px;
-	margin-left: 16px;
-	margin-right: 16px;
-	border-radius: 6px;
+	/* margin-top: 16px; */
+	/* margin-left: 16px; */
+	/* margin-right: 16px; */
+	/* border-radius: 6px; */
 	padding: 6px;
-	border: 2px none #33ccff;
-	background-color: rgba(0,0,0,0.5);
+	background-color: rgba(0,0,0,0.4);
 }
 
 #workspaces {
@@ -127,22 +126,4 @@ tooltip label {
 #tray {
 	padding-right: 8px;
 	padding-left: 10px;
-}
-
-#mpd.paused {
-	color: #414868;
-	font-style: italic;
-}
-
-#mpd.stopped {
-	background: transparent;
-}
-
-#mpd {
-	color: #c0caf5;
-}
-
-#custom-cava-internal{
-font-family: "Hack Nerd Font" ;
-color: #33ccff;
 }

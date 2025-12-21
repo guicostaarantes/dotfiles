@@ -1,0 +1,6 @@
+[Desktop Entry]
+Exec=nethogs -C
+Icon=kitty
+Name=Nethogs
+Terminal=true
+Type=Application

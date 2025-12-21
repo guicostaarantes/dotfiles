@@ -17,17 +17,17 @@
         "backlight",
         "battery",
         "idle_inhibitor",
-        "custom/power"
+        "custom/power",
     ],
     "idle_inhibitor": {
         "format": "{icon} ",
         "format-icons": {
             "activated": "󰒳",
-            "deactivated": "󰒲"
+            "deactivated": "󰒲",
         }
     },
     "tray": {
-        "spacing": 10
+        "spacing": 10,
     },
     "clock": {
         "tooltip": true,
@@ -36,10 +36,11 @@
     },
     "cpu": {
         "format": "  {usage}%",
-        "on-click": "fuzzel"
+        "on-click": "fuzzel",
     },
     "memory": {
-        "format": "  {}%"
+        "format": "  {}%",
+        "on-click": "kitty -e btop",
     },
     "temperature": {
         "thermal-zone": 2,
@@ -48,24 +49,25 @@
     },
     "backlight": {
         "format": "{icon} {percent}%",
-        "format-icons": ["", "", "", "", "", "", "", "", ""]
+        "format-icons": ["", "", "", "", "", "", "", "", ""],
     },
     "battery": {
         "states": {
             "warning": 40,
-            "critical": 20
+            "critical": 20,
         },
         "format": "{icon} {capacity}%",
         "format-charging": " {capacity}%",
         "format-plugged": " {capacity}%",
         "format-alt": "{icon} {time}",
-        "format-icons": ["", "", "", "", ""]
+        "format-icons": ["", "", "", "", ""],
     },
     "network": {
         "interval": 1,
         "format-wifi": "   {bandwidthUpBytes}  {bandwidthDownBytes}",
         "format-ethernet": "󰈀   {bandwidthUpBytes}  {bandwidthDownBytes}",
         "format-disconnected": "󰌙  No connection",
+        "on-click": "kitty -e nethogs -C",
     },
     "pulseaudio": {
         "scroll-step": 5,
@@ -73,9 +75,10 @@
         "format-muted": "  {format_source}",
         "format-source": " {volume}%",
         "format-source-muted": "",
-        "on-click": "kitty -e wiremix"
+        "on-click": "kitty -e wiremix",
     },
     "custom/power": {
-        "format":"   ", "on-click":"sh $HOME/.config/niri/scripts/powermenu.sh"
+        "format":"   ",
+        "on-click":"sh $HOME/.config/niri/scripts/powermenu.sh",
     }
 }

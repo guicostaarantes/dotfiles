@@ -1,11 +1,11 @@
 [Default Applications]
+inode/directory=org.gnome.Nautilus.desktop
 application/pdf=vivaldi-stable.desktop
 image/jpeg=vivaldi-stable.desktop
 image/png=vivaldi-stable.desktop
 text/html=vivaldi-stable.desktop
+x-scheme-handler/about=vivaldi-stable.desktop
+x-scheme-handler/discord=vesktop.desktop
 x-scheme-handler/http=vivaldi-stable.desktop
 x-scheme-handler/https=vivaldi-stable.desktop
-inode/directory=org.gnome.Nautilus.desktop
-x-scheme-handler/discord=vesktop.desktop
-x-scheme-handler/about=vivaldi-stable.desktop
 x-scheme-handler/unknown=vivaldi-stable.desktop

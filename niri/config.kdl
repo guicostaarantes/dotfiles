@@ -100,12 +100,14 @@ binds {
     Mod+M repeat=false { toggle-overview; }
     Mod+N              { focus-column-left; }
     Mod+Alt+N          { move-column-left; }
+    Mod+Shift+N        { move-workspace-to-monitor-left; }
     Mod+E              { focus-window-down; }
     Mod+Alt+E          { move-window-down; }
     Mod+I              { focus-window-up; }
     Mod+Alt+I          { move-window-up; }
     Mod+O              { focus-column-right; }
     Mod+Alt+O          { move-column-right; }
+    Mod+Shift+O        { move-workspace-to-monitor-right; }
 
     Mod+K          { spawn "sh" ".config/niri/scripts/powermenu.sh"; }
     Mod+Comma      { focus-workspace-down; }

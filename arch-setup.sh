@@ -27,11 +27,12 @@ sudo ufw enable
 sudo ufw default allow outgoing
 sudo ufw default deny incoming
 
-# Set up audio and bluetooth
+# Set up audio, bluetooth and network tools
 yay -Sy --needed --noconfirm \
 	extra/bluetui \
 	extra/bluez \
 	extra/bluez-utils \
+	extra/nethogs \
 	extra/pipewire \
 	extra/pipewire-pulse \
 	extra/wiremix \
