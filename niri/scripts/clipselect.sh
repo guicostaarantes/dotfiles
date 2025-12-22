@@ -28,20 +28,25 @@ EOF
 item=$(echo "$cliphist_list" | gawk "$thumbnail" | fuzzel -d --placeholder "Search clipboard..." --counter --no-sort --with-nth 2)
 exit_code=$?
 
-# ALT+0 to clear history
-if [ "$exit_code" -eq 19 ]; then
-  confirmation=$(echo -e "No\nYes" | fuzzel -d --placeholder "Delete history?" --lines 2)
-  [ "$confirmation" == "Yes" ] && rm ~/.cache/cliphist/db && rm -rf "$thumbnail_dir"
-# ALT+1 to delete selected item
-# configure the keybind with `custom-1` in your fuzzel.ini
-elif [ "$exit_code" -eq 10 ]; then
-  if [ -n "$item" ]; then
-    item_id=$(echo "$item" | cut -f1)
-    echo "$item_id" | cliphist delete
-    find "$thumbnail_dir" -name "${item_id}.*" -delete
-  fi
-else
+if [ "$exit_code" -eq 0 ]; then
   [ -z "$item" ] || echo "$item" | cliphist decode | wl-copy
+# Alt+z to wipe entire clipboard
+elif [ "$exit_code" -eq 10 ]; then
+  confirmation=$(echo -e "No\nYes" | fuzzel -d --placeholder "Delete entire history?" --lines 2)
+  [ "$confirmation" == "Yes" ] && rm ~/.cache/cliphist/db && rm -rf "$thumbnail_dir"
+# Alt+x to wipe single clipboard record
+elif [ "$exit_code" -eq 11 ]; then
+  if [ -n "$item" ]; then
+    confirmation=$(echo -e "No\nYes" | fuzzel -d --placeholder "Delete single item?" --lines 2)
+    if [ "$confirmation" == "Yes" ]; then
+      item_id=$(echo "$item" | cut -f1)
+      echo "$item_id" | cliphist delete
+      find "$thumbnail_dir" -name "${item_id}.*" -delete
+    fi
+  fi
+# Alt+c to preview image
+elif [ "$exit_code" -eq 12 ]; then
+  [ -z "$item" ] || echo "$item" | cliphist decode | imv -
 fi
 
 # Delete cached thumbnails that are no longer in cliphist db
